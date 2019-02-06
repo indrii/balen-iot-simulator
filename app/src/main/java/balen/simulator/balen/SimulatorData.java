@@ -1,12 +1,40 @@
 package balen.simulator.balen;
 
+import android.location.Location;
+
 public class SimulatorData {
         private String deviceId;
         private Double temperature;
         private Double latitude;
         private Double longtitude;
         private String door;
+        private String Location;
+        private String Battrey;
+        private String DateTime;
 
+    public String getDateTime() {
+        return DateTime;
+    }
+
+    public void setDateTime(String dateTime) {
+        DateTime = dateTime;
+    }
+
+    public String getBattrey() {
+        return Battrey;
+    }
+
+    public void setBattrey(String battrey) {
+        Battrey = battrey;
+    }
+
+    public String getLocation() {
+        return Location;
+    }
+
+    public void setLocation(String location) {
+        Location = location;
+    }
 
     public String getDeviceId() {
         return deviceId;
