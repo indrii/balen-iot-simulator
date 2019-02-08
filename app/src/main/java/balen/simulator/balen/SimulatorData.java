@@ -8,32 +8,32 @@ public class SimulatorData {
         private Double latitude;
         private Double longtitude;
         private String door;
-        private String Location;
-        private String Battrey;
-        private String DateTime;
-
-    public String getDateTime() {
-        return DateTime;
-    }
-
-    public void setDateTime(String dateTime) {
-        DateTime = dateTime;
-    }
-
-    public String getBattrey() {
-        return Battrey;
-    }
-
-    public void setBattrey(String battrey) {
-        Battrey = battrey;
-    }
+        private String location;
+        private String battery;
+        private String datetime;
 
     public String getLocation() {
-        return Location;
+        return location;
     }
 
     public void setLocation(String location) {
-        Location = location;
+        this.location = location;
+    }
+
+    public String getBattery() {
+        return battery;
+    }
+
+    public void setBattery(String battery) {
+        this.battery = battery;
+    }
+
+    public String getDatetime() {
+        return datetime;
+    }
+
+    public void setDatetime(String datetime) {
+        this.datetime = datetime;
     }
 
     public String getDeviceId() {

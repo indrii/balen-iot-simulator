@@ -12,6 +12,17 @@
     android:paddingEnd="1dp">
 
 
+    <TextView
+        android:id="@+id/battreyText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="280dp"
+        android:layout_marginBottom="10dp"
+        android:padding="10dp"
+        android:text=""
+        android:textAlignment="viewStart"
+        android:textColor="#FFFFFF"
+        android:textSize="20dp" />
 
         <TextView
             android:id="@+id/textDevice"
@@ -72,7 +83,7 @@
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="130sp"
                 android:layout_height="38dp"
-                android:layout_marginLeft="50dp"
+                android:layout_marginLeft="80dp"
                 android:background="#1c7426"
                 android:gravity="center"
                 android:text="OPEN"
@@ -83,7 +94,7 @@
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="130dp"
                 android:layout_height="38dp"
-                android:layout_marginLeft="72dp"
+                android:layout_marginLeft="7dp"
                 android:layout_toRightOf="@+id/radioOpen"
                 android:background="#ee00"
                 android:gravity="center"
@@ -143,18 +154,6 @@
             android:textSize="35dp"
             android:layout_marginTop="10dp"
             />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/locationText"
-            android:text=""
-            android:textColor="#FFFFFF"
-            android:textSize="35dp"
-            android:textAlignment="center"
-            android:layout_centerInParent="true"
-            android:layout_below="@+id/txtPoint"
-            android:layout_marginBottom="10dp"
-            android:padding="10dp"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -214,7 +213,7 @@
         android:layout_height="38dp"
         android:layout_below="@+id/radioGroup"
         android:layout_gravity="center"
-        android:layout_marginLeft="155dp"
+        android:layout_marginLeft="75dp"
         android:layout_marginTop="1dp"
         android:layout_toRightOf="@+id/buttonSubmitToken"
         android:background="#F3E6B1"
@@ -232,6 +231,7 @@
         android:layout_below="@+id/radioGroup"
         android:layout_gravity="center"
         android:layout_marginTop="1dp"
+        android:layout_marginLeft="45dp"
         android:background="#9BEFAC"
         android:clickable="true"
         android:gravity="center"
