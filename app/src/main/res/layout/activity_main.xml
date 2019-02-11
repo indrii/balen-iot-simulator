@@ -1,28 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/perentQuantity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#1876D2"
+    android:orientation="vertical"
     android:paddingTop="1dp"
-    android:id="@+id/perentQuantity"
-    android:background="#000"
     android:paddingEnd="1dp">
 
-
-    <TextView
-        android:id="@+id/battreyText"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="280dp"
-        android:layout_marginBottom="10dp"
-        android:padding="10dp"
-        android:text=""
-        android:textAlignment="viewStart"
-        android:textColor="#FFFFFF"
-        android:textSize="20dp" />
+        android:layout_gravity="right"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <TextView
+            android:id="@+id/battreyText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textAlignment="viewStart"
+            android:textColor="#000"
+            android:textSize="20dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="30dp">
 
         <TextView
             android:id="@+id/textDevice"
@@ -30,53 +40,54 @@
             android:layout_height="wrap_content"
             android:layout_gravity="top"
             android:layout_marginLeft="1dp"
-            android:layout_marginTop="40dp"
             android:text="Device"
-            android:textColor="#ffff"
+            android:textColor="#000"
             android:textSize="35dp"
-            android:textStyle="bold"
-            />
+            android:textStyle="bold" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="35dp"
-        android:layout_marginTop="53dp"
-        android:layout_toRightOf="@+id/textDevice"
-        android:background="#ffff"
-        android:ems="10"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/deviceField"/>
+        <EditText
+            android:id="@+id/deviceField"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="35dp"
+            android:layout_toRightOf="@+id/textDevice"
+            android:background="#ffff"
+            android:ems="8"
+            android:padding="4dp" />
+
+    </LinearLayout>
 
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/door"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+
             android:layout_gravity="top"
             android:layout_marginLeft="135dp"
             android:layout_marginTop="1dp"
             android:text="Door State"
-            android:textColor="#ffff"
+            android:textColor="#000"
             android:textSize="35dp"
-            android:textStyle="bold"
-            android:layout_below="@+id/framePoint"/>
+            android:textStyle="bold" />
+    </RelativeLayout>
 
-    <RadioGroup
-        android:id="@+id/radioGroup"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="38dp"
-        android:layout_below="@+id/door"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="28dp"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-        <RelativeLayout
+        <RadioGroup
+            android:id="@+id/radioGroup"
             android:layout_width="match_parent"
-            android:layout_height="38dp">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="28dp"
+            android:orientation="horizontal">
 
             <RadioButton
                 android:id="@+id/radioOpen"
@@ -85,6 +96,7 @@
                 android:layout_height="38dp"
                 android:layout_marginLeft="80dp"
                 android:background="#1c7426"
+                android:buttonTint="#ffff"
                 android:gravity="center"
                 android:text="OPEN"
                 android:textColor="#000" />
@@ -97,150 +109,155 @@
                 android:layout_marginLeft="7dp"
                 android:layout_toRightOf="@+id/radioOpen"
                 android:background="#ee00"
+                android:buttonTint="#ffff"
                 android:gravity="center"
                 android:text="CLOSE"
                 android:textColor="#000" />
-        </RelativeLayout>
-    </RadioGroup>
+        </RadioGroup>
 
 
+    </RelativeLayout>
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:layout_marginTop="120dp">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="20dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="top"
-            android:layout_marginLeft="110dp"
             android:layout_marginTop="1dp"
             android:text="Temperature"
-            android:textColor="#ffff"
+            android:textColor="#000"
             android:textSize="35dp"
             android:textStyle="bold" />
+
         <EditText
             android:id="@+id/fieldTemperature"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="160dp"
-            android:layout_marginTop="96dp"
-            android:ems="5"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:background="#ffff"
-
-            />
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:background="#fff"
+            android:ems="6"
+            android:nextFocusLeft="@id/fieldTemperature"
+            android:padding="4dp" />
 
 
-    </FrameLayout>
+    </LinearLayout>
 
-    <FrameLayout
+    <LinearLayout
+        android:id="@+id/framePoint"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_marginTop="280dp"
-        android:id="@+id/framePoint">
-        <TextView
-            android:id="@+id/txtPoint"
-            android:layout_marginLeft="150dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="30dp">
+
+        <!--<TextView-->
+        <!--android:id="@+id/txtPoint"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Pointer"-->
+        <!--android:textColor="#000"-->
+        <!--android:textSize="35dp"-->
+        <!--android:textStyle="bold" />-->
+
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:text="Pointer"
-            android:textStyle="bold"
-            android:textColor="#ffff"
-            android:textSize="35dp"
-            android:layout_marginTop="10dp"
-            />
+            android:layout_marginLeft="20dp">
 
-        <TextView
+            <TextView
+                android:id="@+id/txtLat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:text="Latitude"
+                android:textColor="#000"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/latField"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtLat"
+                android:background="#ffff"
+                android:ems="6"
+                android:gravity="center"
+                android:padding="3dp"
+                android:textSize="20dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="60dp"
-            android:text="Latitude"
-            android:textStyle="bold"
-            android:textColor="#ffff"
-            android:textSize="20dp"
-            android:layout_marginTop="60dp"
-            />
-        <TextView
-            android:layout_marginLeft="230dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Longitude"
-            android:textStyle="bold"
-            android:textColor="#ffff"
-            android:textSize="20dp"
-            android:layout_marginTop="60dp"
-            />
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/txtLon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:nextFocusLeft="@id/txtLat"
+                android:text="Longitude"
+                android:textColor="#000"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/longField"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtLon"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="0dp"
+                android:background="#ffff"
+                android:ems="6"
+                android:gravity="center"
+                android:padding="3dp"
+                android:textSize="20dp" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="20dp">
+
+        <Button
+            android:id="@+id/buttonSubmitToken"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="130sp"
+            android:layout_height="38sp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="50dp"
+            android:background="#9BEFAC"
+            android:clickable="true"
+            android:gravity="center"
+            android:onClick="submitRepeating"
+            android:text="SUBMIT"
+            android:textColor="@android:color/black" />
+
+        <Button
+            android:id="@+id/buttonCancelToken"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="130sp"
+            android:layout_height="38dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="25dp"
+            android:background="#F3E6B1"
+            android:clickable="true"
+            android:gravity="center"
+            android:nextFocusLeft="@id/buttonSubmitToken"
+            android:onClick="stopRepeating"
+            android:text="CANCEL"
+            android:textColor="@android:color/black" />
 
 
-        <EditText
-            android:id="@+id/latField"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="60dp"
-            android:layout_marginTop="96dp"
-            android:ems="7"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:background="#ffff"
-
-            />
-        <EditText
-            android:id="@+id/longField"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="230dp"
-            android:layout_marginTop="96dp"
-            android:ems="7"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:background="#ffff"
-
-            />
-
-    </FrameLayout>
-
-    <Button
-        android:id="@+id/buttonCancelToken"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="130sp"
-        android:layout_height="38dp"
-        android:layout_below="@+id/radioGroup"
-        android:layout_gravity="center"
-        android:layout_marginLeft="75dp"
-        android:layout_marginTop="1dp"
-        android:layout_toRightOf="@+id/buttonSubmitToken"
-        android:background="#F3E6B1"
-        android:clickable="true"
-        android:gravity="center"
-        android:text="CANCEL"
-        android:textColor="@android:color/black" />
-
-
-    <Button
-        android:id="@+id/buttonSubmitToken"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="130sp"
-        android:layout_height="38sp"
-        android:layout_below="@+id/radioGroup"
-        android:layout_gravity="center"
-        android:layout_marginTop="1dp"
-        android:layout_marginLeft="45dp"
-        android:background="#9BEFAC"
-        android:clickable="true"
-        android:gravity="center"
-        android:text="SUBMIT"
-        android:textColor="@android:color/black" />
-
-
-
-
-
-
-</RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

@@ -1,19 +1,22 @@
 package balen.simulator.balen;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.location.Location;
-import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.BatteryManager;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,25 +26,29 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.location.LocationSettingsResponse;
+import com.google.android.gms.location.SettingsClient;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.rabbitmq.client.AMQP;
+import com.google.android.gms.tasks.Task;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.Channel;
 
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.MessageProperties;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Locale;
+import java.util.Date;
 import java.util.concurrent.TimeoutException;
 
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -51,13 +58,13 @@ import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListe
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
 
-public class MainActivity extends AppCompatActivity implements ConnectionCallbacks, OnConnectionFailedListener {
+public class MainActivity extends AppCompatActivity implements ConnectionCallbacks, OnConnectionFailedListener, LocationListener {
 
     private static final Object RequestPermissionsCode = 1;
     private GoogleApiClient googleApiClient;
     private EditText device;
-    private EditText latitude;
-    private EditText longtitude;
+    private TextView latitude;
+    private TextView longtitude;
     private EditText temperature;
     private Button submitButton;
     private Button cancleButton;
@@ -65,28 +72,30 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
     private RadioButton closeRadio;
     private RadioGroup doorGroup;
     private TextView battrey;
-
-
     private FusedLocationProviderClient fusedLocationProviderClient;
+    private Handler mHandler = new Handler();
+    Thread t;
+    private LocationRequest mLocationRequest;
 
     private BroadcastReceiver mBatInfoReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            int level= intent.getIntExtra(BatteryManager.EXTRA_LEVEL,0);
-            battrey.setText(String.valueOf(level)+"%");
+            int level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0);
+            battrey.setText(String.valueOf(level));
         }
     };
+    private boolean mRequestingLocationUpdates = true;
+    private boolean suspendPublisher = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
         device = findViewById(R.id.deviceField);
-        longtitude = (EditText) findViewById(R.id.longField);
-        latitude = (EditText) findViewById(R.id.latField);
+        longtitude = (TextView) findViewById(R.id.longField);
+        latitude = (TextView) findViewById(R.id.latField);
         temperature = findViewById(R.id.fieldTemperature);
         submitButton = findViewById(R.id.buttonSubmitToken);
         cancleButton = findViewById(R.id.buttonCancelToken);
@@ -95,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
         doorGroup = findViewById(R.id.radioGroup);
         battrey = findViewById(R.id.battreyText);
 
-        this.registerReceiver(this.mBatInfoReceiver,new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        this.registerReceiver(this.mBatInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
 
         googleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
@@ -105,71 +114,179 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
-        submitButton.setOnClickListener(new View.OnClickListener() {
+        createLocationRequest();
+
+        MainActivity diz = this;
+
+        t = new Thread() {
             @Override
-            public void onClick(View v) {
-                System.out.println("submit clicked");
+            public void run() {
+                while (!isInterrupted()) {
 
-                SimulatorData data = new SimulatorData();
-                data.setDeviceId(String.valueOf(device.getText().toString()));
+                    try {
+                        Thread.sleep(2000);
 
-                if (temperature.getText()!=null){
-                    data.setTemperature(Double.valueOf(temperature.getText().toString()));
+                        runOnUiThread(new Runnable() {
+
+                            @Override
+                            public void run() {
+                                if ((ActivityCompat.checkSelfPermission(diz, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) && (ActivityCompat.checkSelfPermission(diz, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
+                                 requestPermissions();
+                                }else {
+
+                                    if (!suspendPublisher){
+                                        fusedLocationProviderClient.getLastLocation().addOnSuccessListener(diz, new OnSuccessListener<Location>() {
+                                            @Override
+                                            public void onSuccess(Location location) {
+                                                // Location location = locationResult.getLastLocation();
+                                                System.out.println("===LOCATION CALLBACK===");
+                                                System.out.println(location);
+                                                System.out.println("=======================");
+
+                                                if (location != null) {
+                                                    System.out.println("===GET LOCATION SUCCESS===");
+                                                    System.out.println(location.getLongitude());
+                                                    System.out.println(location.getLatitude());
+                                                    System.out.println(new Date(location.getTime()));
+                                                    System.out.println("=========================");
+
+                                                    latitude.setText(String.valueOf(location.getLatitude()));
+                                                    longtitude.setText(String.valueOf(location.getLongitude()));
+                                                }
+
+                                            }
+                                        });
+                                    }
+
+                                }
+
+                                if (!suspendPublisher){
+                                    SimulatorData data = new SimulatorData();
+                                    data.setDeviceId(String.valueOf(device.getText().toString()));
+
+                                    if (temperature.getText() != null && !temperature.getText().toString().isEmpty()) {
+                                        data.setTemperature(Double.valueOf(temperature.getText().toString()));
+                                    }
+                                    if (latitude.getText() != null && !latitude.getText().equals("")) {
+                                        data.setLatitude(Double.valueOf(latitude.getText().toString()));
+                                    }
+                                    if (longtitude.getText() != null && !longtitude.getText().equals("")) {
+                                        data.setLongitude(Double.valueOf(longtitude.getText().toString()));
+                                    }
+
+                                    data.setBattery(Double.valueOf(battrey.getText().toString()));
+
+
+
+                                    if (openRadio.isChecked()) {
+                                        data.setDoor(String.valueOf(openRadio.getText().toString()));
+                                    } else if (closeRadio.isChecked()) {
+                                        data.setDoor(String.valueOf(closeRadio.getText().toString()));
+                                    }
+
+
+                                    ObjectMapper mapper = new ObjectMapper();
+
+                                    try {
+                                        String jsonResult = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(data);
+                                        System.out.println(jsonResult);
+                                        new PublisherTask().execute(jsonResult);
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }
+                        });
+
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
-                if (latitude.getText()!=null){
-                    data.setLatitude(Double.valueOf(latitude.getText().toString()));
-                }
-                if (longtitude.getText()!=null){
-                    data.setLongtitude(Double.valueOf(longtitude.getText().toString()));
-                }
-
-                data.setBattery(String.valueOf(battrey.getText().toString()));
-//                data.getDateTime().toString();
-//                data.getBattrey().toString();
-
-                if (openRadio.isChecked()) {
-                    data.setDoor(String.valueOf(openRadio.getText().toString()));
-                } else if (closeRadio.isChecked()) {
-                    data.setDoor(String.valueOf(closeRadio.getText().toString()));
-                }
-
-
-                ObjectMapper mapper = new ObjectMapper();
-
-                try {
-                    String jsonResult = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(data);
-                    System.out.println(jsonResult);
-                    new PublisherTask().execute(jsonResult);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
             }
-        });
+        };
 
+//        t.start();
 
-        cancleButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                latitude.setText("");
-                longtitude.setText("");
-                temperature.setText("");
-                openRadio.setChecked(false);
-                closeRadio.setChecked(false);
-                device.setText("");
-            }
-        });
+//
+//        submitButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                System.out.println("submit clicked");
+//
+//
+//            }
+//        });
 
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        startLocationUpdates();
+    }
+
+    private void startLocationUpdates() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            fusedLocationProviderClient.requestLocationUpdates(mLocationRequest, mLocationCallback, null);
+        }
+    }
+
+    public void submitRepeating(View v) {
+//        //mHandler.postDelayed(mToastRunnable, 1000);
+//        mToastRunnable.run();
+        if(!t.isAlive()){
+            t.start();
+        }
+
+        suspendPublisher = false;
+
+    }
+
+    public void stopRepeating(View v) {
+//        mHandler.removeCallbacks(mToastRunnable);
+        latitude.setText("");
+        longtitude.setText("");
+        temperature.setText("");
+        openRadio.setChecked(false);
+        closeRadio.setChecked(false);
+        device.setText("");
+
+        if(t.isAlive()){
+            //t.stop();
+        }
+
+        suspendPublisher = true;
+
+    }
+//
+//    private Runnable mToastRunnable = new Runnable() {
+//        @Override
+//        public void run() {
+//            Toast.makeText(MainActivity.this, "Nembakkkkkk", Toast.LENGTH_SHORT).show();
+//            mHandler.postDelayed(this,5000);
+//        }
+//    };
 
     @Override
     protected void onStart() {
         super.onStart();
         googleApiClient.connect();
+
+
+
+
+    }
+
+    private void createLocationRequest() {
+        mLocationRequest = LocationRequest.create();
+        mLocationRequest.setInterval(2000);
+        mLocationRequest.setFastestInterval(2000);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
     }
 
     @Override
     protected void onStop(){
+        fusedLocationProviderClient.removeLocationUpdates(mLocationCallback);
         if (googleApiClient.isConnected()){
             googleApiClient.disconnect();
         }
@@ -180,25 +297,11 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
-        if (ActivityCompat.checkSelfPermission(this, ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
-            requestPermissions();
-        }else {
-            fusedLocationProviderClient.getLastLocation()
-                    .addOnSuccessListener(this, new OnSuccessListener<Location>() {
-                        @Override
-                        public void onSuccess(Location location) {
-                            if (location != null) {
-//                                SimulatorData data = new SimulatorData();
-                                latitude.setText(String.valueOf(location.getLatitude()));
-                                longtitude.setText(String.valueOf(location.getLongitude()));
-                            }
-                        }
-                    });
-        }
+
     }
-    
+
     private void requestPermissions(){
-        ActivityCompat.requestPermissions(MainActivity.this, new 
+        ActivityCompat.requestPermissions(MainActivity.this, new
                 String[]{ACCESS_FINE_LOCATION}, (Integer) RequestPermissionsCode);
     }
 
@@ -211,6 +314,39 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
         Log.e("MainActivity","Connection failed :" + connectionResult.getErrorCode());
+    }
+
+    private LocationCallback mLocationCallback = new LocationCallback() {
+        @Override
+        public void onLocationResult(LocationResult locationResult) {
+            super.onLocationResult(locationResult);
+            System.out.println("===LOCATION CALLBACK===");
+
+            for (Location loc : locationResult.getLocations()) {
+                System.out.println(loc);
+            }
+
+            Location location = locationResult.getLastLocation();
+            System.out.println("===LAST LOCATION===");
+            System.out.println(location);
+            System.out.println("=======================");
+
+            if (location != null) {
+                System.out.println("===GET LOCATION SUCCESS===");
+                System.out.println(location.getLongitude());
+                System.out.println(location.getLatitude());
+                System.out.println(new Date(location.getTime()));
+                System.out.println("=========================");
+
+                latitude.setText(String.valueOf(location.getLatitude()));
+                longtitude.setText(String.valueOf(location.getLongitude()));
+            }
+        }
+    };
+
+    @Override
+    public void onLocationChanged(Location location) {
+
     }
 
     private class PublisherTask extends AsyncTask<String, Void, Long> {
@@ -236,9 +372,11 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
                 conn = factory.newConnection();
                 channel = conn.createChannel();
                 channel.exchangeDeclare("(AMQP default)", "direct", true);
-                channel.queueDeclare("DEV.BALENA_REQUEST",true,false,false,null);
-                channel.queueBind("DEV.BALENA_REQUEST", "(AMQP default)", "null" );
+                channel.queueDeclare("STG.BALENA_REQUEST",true,false,false,null);
+                channel.queueBind("STG.BALENA_REQUEST", "(AMQP default)", "null" );
                 channel.basicPublish("(AMQP default)", "null", MessageProperties.TEXT_PLAIN,strings[0].getBytes("UTF-8"));
+                channel.close();
+                conn.close();
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (TimeoutException e) {

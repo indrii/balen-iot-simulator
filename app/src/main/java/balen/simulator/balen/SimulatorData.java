@@ -1,40 +1,38 @@
 package balen.simulator.balen;
 
-import android.location.Location;
-
 public class SimulatorData {
         private String deviceId;
         private Double temperature;
         private Double latitude;
-        private Double longtitude;
+        private Double longitude;
         private String door;
-        private String location;
-        private String battery;
-        private String datetime;
+       // private String location;
+        private Double battery;
+        //private String datetime;
 
-    public String getLocation() {
-        return location;
-    }
+//    public String getLocation() {
+//        return location;
+//    }
+//
+//    public void setLocation(String location) {
+//        this.location = location;
+//    }
 
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public String getBattery() {
+    public Double getBattery() {
         return battery;
     }
 
-    public void setBattery(String battery) {
+    public void setBattery(Double battery) {
         this.battery = battery;
     }
 
-    public String getDatetime() {
-        return datetime;
-    }
-
-    public void setDatetime(String datetime) {
-        this.datetime = datetime;
-    }
+//    public String getDatetime() {
+//        return datetime;
+//    }
+//
+//    public void setDatetime(String datetime) {
+//        this.datetime = datetime;
+//    }
 
     public String getDeviceId() {
         return deviceId;
@@ -64,12 +62,12 @@ public class SimulatorData {
         return door;
     }
 
-    public Double getLongtitude() {
-        return longtitude;
+    public Double getLongitude() {
+        return longitude;
     }
 
-    public void setLongtitude(Double longtitude) {
-        this.longtitude = longtitude;
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
     }
 
     public void setDoor(String door) {
