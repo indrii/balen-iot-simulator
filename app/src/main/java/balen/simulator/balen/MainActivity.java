@@ -2,6 +2,7 @@ package balen.simulator.balen;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -17,15 +18,17 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -58,24 +61,26 @@ import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListe
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
 
-public class MainActivity extends AppCompatActivity implements ConnectionCallbacks, OnConnectionFailedListener, LocationListener {
+public class MainActivity extends Activity implements ConnectionCallbacks, OnConnectionFailedListener, LocationListener {
 
     private static final Object RequestPermissionsCode = 1;
     private GoogleApiClient googleApiClient;
     private EditText device;
     private TextView latitude;
     private TextView longtitude;
-    private EditText temperature;
+    private TextView temperature;
     private Button submitButton;
     private Button cancleButton;
     private RadioButton openRadio;
     private RadioButton closeRadio;
     private RadioGroup doorGroup;
     private TextView battrey;
+    private SeekBar seekbar;
+    private ToggleButton submitToggle;
     private FusedLocationProviderClient fusedLocationProviderClient;
-    private Handler mHandler = new Handler();
     Thread t;
     private LocationRequest mLocationRequest;
+    private final  int min = 50;
 
     private BroadcastReceiver mBatInfoReceiver = new BroadcastReceiver() {
         @Override
@@ -93,16 +98,69 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        device = findViewById(R.id.deviceField);
+        device = (EditText) findViewById(R.id.deviceField);
         longtitude = (TextView) findViewById(R.id.longField);
         latitude = (TextView) findViewById(R.id.latField);
-        temperature = findViewById(R.id.fieldTemperature);
-        submitButton = findViewById(R.id.buttonSubmitToken);
-        cancleButton = findViewById(R.id.buttonCancelToken);
-        openRadio = findViewById(R.id.radioOpen);
-        closeRadio = findViewById(R.id.radioClose);
-        doorGroup = findViewById(R.id.radioGroup);
-        battrey = findViewById(R.id.battreyText);
+        temperature = (TextView) findViewById(R.id.textTemp);
+//        submitButton = (Button) findViewById(R.id.buttonSubmitToken);
+//        cancleButton = (Button) findViewById(R.id.buttonCancelToken);
+        openRadio = (RadioButton) findViewById(R.id.radioOpen);
+        closeRadio = (RadioButton) findViewById(R.id.radioClose);
+        doorGroup = (RadioGroup) findViewById(R.id.radioGroup);
+        battrey = (TextView) findViewById(R.id.battreyText);
+        seekbar = (SeekBar) findViewById(R.id.seekBarTemp);
+        submitToggle = (ToggleButton) findViewById(R.id.toggleBtn);
+
+        submitToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean b) {
+                if (b){
+                    if(!t.isAlive()){
+                        t.start();
+                    }
+
+                    suspendPublisher = false;
+                }else{
+                    latitude.setText("");
+                    longtitude.setText("");
+                    temperature.setText("");
+                    openRadio.setChecked(false);
+                    closeRadio.setChecked(false);
+                    device.setText("");
+                    seekbar.setProgress(50);
+                    if(t.isAlive()){
+                        //t.stop();
+                    }
+
+                    suspendPublisher = true;
+                }
+
+            }
+        });
+
+        seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+                int buffer = progress - min;
+                temperature.setText(""+ buffer + "");
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+//
+//            public void  setMin(int min){
+//                this.minimumValue = min;
+//            }
+        });
 
         this.registerReceiver(this.mBatInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
 
@@ -113,6 +171,8 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
                 .build();
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+
+
 
         createLocationRequest();
 
@@ -250,7 +310,7 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
         openRadio.setChecked(false);
         closeRadio.setChecked(false);
         device.setText("");
-
+        seekbar.setProgress(50);
         if(t.isAlive()){
             //t.stop();
         }
@@ -290,6 +350,7 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
         if (googleApiClient.isConnected()){
             googleApiClient.disconnect();
         }
+        unregisterReceiver(this.mBatInfoReceiver);
         super.onStop();
     }
 
@@ -389,6 +450,9 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitNetwork().build();
             StrictMode.setThreadPolicy(policy);
         }
+
+
+
     }
 
 }
