@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.os.BatteryManager;
@@ -118,6 +119,7 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
                     if(!t.isAlive()){
                         t.start();
                     }
+                    submitToggle.setBackgroundColor(Color.RED);
 
                     suspendPublisher = false;
                 }else{
@@ -131,6 +133,7 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
                     if(t.isAlive()){
                         //t.stop();
                     }
+                    submitToggle.setBackgroundColor(Color.rgb(8,80,118));
 
                     suspendPublisher = true;
                 }

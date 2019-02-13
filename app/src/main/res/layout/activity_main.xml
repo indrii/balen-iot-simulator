@@ -39,7 +39,8 @@
             android:textColor="#fff"
             android:layout_gravity="center"
             android:nextFocusLeft="@id/blnLogo"
-            android:layout_marginLeft="20dp"/>
+            android:layout_marginLeft="20dp"
+            android:fontFamily="@font/comfortaa_regular" />
 
     </LinearLayout>
 
@@ -59,7 +60,9 @@
             android:text="device"
             android:textColor="#fff"
             android:textSize="25dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:fontFamily="@font/comfortaa_regular"
+            />
 
         <EditText
             android:id="@+id/deviceField"
@@ -69,7 +72,8 @@
             android:ems="16"
             android:layout_marginTop="10dp"
             android:padding="4dp"
-
+            android:backgroundTint="#FFC125"
+            android:fontFamily="@font/comfortaa_regular"
             />
 
     </LinearLayout>
@@ -87,7 +91,9 @@
         android:text="location"
         android:textColor="#fff"
         android:textSize="25dp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:fontFamily="@font/comfortaa_regular"/>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -95,8 +101,9 @@
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp">
-
+                android:layout_marginLeft="20dp"
+                android:background="#FFC125"
+                android:id="@+id/relLat">
                 <TextView
                     android:id="@+id/txtLat"
                     android:layout_width="wrap_content"
@@ -105,23 +112,29 @@
                     android:text="Latitude"
                     android:textColor="#000"
                     android:textSize="20dp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:fontFamily="@font/comfortaa_regular"/>
 
                 <TextView
                     android:id="@+id/latField"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/txtLat"
-                    android:background="#ffff"
                     android:ems="6"
                     android:gravity="center"
                     android:padding="3dp"
-                    android:textSize="20dp" />
+                    android:textSize="20dp"
+                    android:textColor="#000"
+                    android:fontFamily="@font/comfortaa_regular"/>
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="#FFC125"
+                android:nextFocusLeft="@id/relLat"
+                android:layout_marginLeft="10dp"
+                android:fontFamily="@font/comfortaa_regular">
 
 
                 <TextView
@@ -133,7 +146,8 @@
                     android:text="Longitude"
                     android:textColor="#000"
                     android:textSize="20dp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:fontFamily="@font/comfortaa_regular"/>
 
                 <TextView
                     android:id="@+id/longField"
@@ -142,11 +156,12 @@
                     android:layout_below="@id/txtLon"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="0dp"
-                    android:background="#ffff"
                     android:ems="6"
                     android:gravity="center"
                     android:padding="3dp"
-                    android:textSize="20dp" />
+                    android:textSize="20dp"
+                    android:textColor="#000"
+                    android:fontFamily="@font/comfortaa_regular"/>
 
             </RelativeLayout>
 
@@ -167,7 +182,8 @@
             android:text="temperature"
             android:textColor="#fff"
             android:textSize="25dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:fontFamily="@font/comfortaa_regular"/>
 
         <!--<EditText-->
             <!--android:id="@+id/fieldTemperature"-->
@@ -183,7 +199,9 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        >
+
         <SeekBar
             android:layout_width="250dp"
             android:layout_height="wrap_content"
@@ -192,27 +210,35 @@
             android:padding="5dp"
             android:progress="50"
             android:max="100"
+            android:progressTint="#04c1ea"
+            android:thumbTint="#04c1ea"
 
 
             />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFC125">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#fff"
+            android:textColor="#000"
             android:layout_marginLeft="10dp"
             android:textSize="25dp"
             android:padding="1dp"
             android:id="@+id/textTemp"
-            android:text="0"/>
+            android:text="0"
+            android:fontFamily="@font/comfortaa_regular"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#fff"
+            android:textColor="#000"
             android:layout_marginLeft="1dp"
             android:textSize="25dp"
             android:padding="1dp"
-            android:text="°"/>
-
+            android:text="°"
+            android:fontFamily="@font/comfortaa_regular"/>
+        </LinearLayout>
     </LinearLayout>
 
     </LinearLayout>
@@ -230,7 +256,8 @@
             android:text="door state"
             android:textColor="#fff"
             android:textSize="25dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:fontFamily="@font/comfortaa_regular"/>
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
@@ -250,8 +277,8 @@
                 android:layout_width="130sp"
                 android:layout_height="38dp"
                 android:layout_marginLeft="80dp"
-                android:background="#1c7426"
-                android:buttonTint="#ffff"
+                android:background="#FFC125"
+                android:buttonTint="#038ca9"
                 android:gravity="center"
                 android:text="OPEN"
                 android:textColor="#000" />
@@ -263,8 +290,8 @@
                 android:layout_height="38dp"
                 android:layout_marginLeft="7dp"
                 android:layout_toRightOf="@+id/radioOpen"
-                android:background="#ee00"
-                android:buttonTint="#ffff"
+                android:background="#FFC125"
+                android:buttonTint="#038ca9"
                 android:gravity="center"
                 android:text="CLOSE"
                 android:textColor="#000" />
@@ -290,7 +317,8 @@
         android:layout_marginRight="40dp"
         android:orientation="horizontal"
         android:padding="2dp"
-        android:layout_marginLeft="320dp"
+        android:layout_marginLeft="286dp"
+        android:background="#FFC125"
 
         >
 
@@ -300,56 +328,19 @@
             android:layout_height="wrap_content"
             android:text=""
             android:textAlignment="viewStart"
-            android:textColor="#fff"
+            android:textColor="#000"
             android:textSize="20dp" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="%"
             android:textAlignment="viewStart"
-            android:textColor="#fff"
+            android:textColor="#000"
             android:textSize="20dp"
             android:nextFocusLeft="@id/battreyText"/>
     </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="20dp">
-
-        <!--<Button-->
-            <!--android:id="@+id/buttonSubmitToken"-->
-            <!--style="?android:attr/buttonStyleSmall"-->
-            <!--android:layout_width="130sp"-->
-            <!--android:layout_height="38sp"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:layout_marginLeft="50dp"-->
-            <!--android:background="#9BEFAC"-->
-            <!--android:clickable="true"-->
-            <!--android:gravity="center"-->
-            <!--android:onClick="submitRepeating"-->
-            <!--android:text="SUBMIT"-->
-            <!--android:textColor="@android:color/black" />-->
-
-        <!--<Button-->
-            <!--android:id="@+id/buttonCancelToken"-->
-            <!--style="?android:attr/buttonStyleSmall"-->
-            <!--android:layout_width="130sp"-->
-            <!--android:layout_height="38dp"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:layout_marginLeft="25dp"-->
-            <!--android:background="#F3E6B1"-->
-            <!--android:clickable="true"-->
-            <!--android:gravity="center"-->
-            <!--android:nextFocusLeft="@id/buttonSubmitToken"-->
-            <!--android:onClick="stopRepeating"-->
-            <!--android:text="CANCEL"-->
-            <!--android:textColor="@android:color/black" />-->
-
-
-    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -362,6 +353,8 @@
             android:id="@+id/toggleBtn"
             android:textOn="Stop"
             android:textOff="Transmit"
+            android:background="#04c1ea"
+            android:textColor="#000"
             />
     </LinearLayout>
 </LinearLayout>
