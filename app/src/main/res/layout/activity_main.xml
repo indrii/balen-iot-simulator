@@ -15,12 +15,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginTop="10dp"
         android:background="#0067b4"
         android:orientation="horizontal"
-        android:layout_marginTop="10dp"
         android:padding="2dp">
 
         <ImageView
+            android:id="@+id/blnLogo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -28,22 +29,20 @@
             android:maxWidth="110dp"
             android:maxHeight="45dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/balen2"
-            android:id="@+id/blnLogo"/>
+            android:src="@drawable/balen2" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="40dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:fontFamily="@font/comfortaa_regular"
+            android:nextFocusLeft="@id/blnLogo"
             android:text="commender"
             android:textColor="#fff"
-            android:layout_gravity="center"
-            android:nextFocusLeft="@id/blnLogo"
-            android:layout_marginLeft="20dp"
-            android:fontFamily="@font/comfortaa_regular" />
+            android:textSize="40dp" />
 
     </LinearLayout>
-
 
 
     <LinearLayout
@@ -52,31 +51,47 @@
         android:orientation="vertical"
         android:padding="3dp">
 
-        <TextView
-            android:id="@+id/textDevice"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="1dp"
-            android:text="device"
-            android:textColor="#fff"
-            android:textSize="25dp"
-            android:textStyle="bold"
-            android:fontFamily="@font/comfortaa_regular"
-            />
+            android:layout_marginLeft="20dp">
 
-        <EditText
-            android:id="@+id/deviceField"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#ffff"
-            android:ems="16"
-            android:layout_marginTop="10dp"
-            android:padding="4dp"
-            android:backgroundTint="#FFC125"
-            android:fontFamily="@font/comfortaa_regular"
-            />
 
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="left"
+                android:background="@drawable/button_device" />
+
+            <TextView
+                android:id="@+id/textDevice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="1dp"
+                android:fontFamily="@font/comfortaa_regular"
+                android:text="   device"
+                android:textColor="#fff"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+        </LinearLayout>
     </LinearLayout>
+
+    <EditText
+        android:id="@+id/deviceField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="#ffff"
+        android:backgroundTint="#FFC125"
+        android:ems="16"
+        android:fontFamily="@font/comfortaa_regular"
+        android:padding="4dp"
+        android:textColor="#000" />
+
+
     <LinearLayout
         android:id="@+id/textLocation"
         android:layout_width="match_parent"
@@ -84,36 +99,55 @@
         android:orientation="vertical"
         android:padding="3dp">
 
-        <TextView
-        android:id="@+id/txtPoint"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="location"
-        android:textColor="#fff"
-        android:textSize="25dp"
-        android:textStyle="bold"
-        android:fontFamily="@font/comfortaa_regular"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp">
+
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="left"
+                android:background="@drawable/button_location" />
+
+            <TextView
+                android:id="@+id/txtPoint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/comfortaa_regular"
+                android:text="   location"
+                android:textColor="#fff"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+
             <RelativeLayout
+                android:id="@+id/relLat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:background="#FFC125"
-                android:id="@+id/relLat">
+                android:layout_marginLeft="50dp"
+                android:background="#FFC125">
+
                 <TextView
                     android:id="@+id/txtLat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="25dp"
+                    android:fontFamily="@font/comfortaa_regular"
                     android:text="Latitude"
                     android:textColor="#000"
                     android:textSize="20dp"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/comfortaa_regular"/>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/latField"
@@ -121,20 +155,20 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/txtLat"
                     android:ems="6"
+                    android:fontFamily="@font/comfortaa_regular"
                     android:gravity="center"
                     android:padding="3dp"
-                    android:textSize="20dp"
                     android:textColor="#000"
-                    android:fontFamily="@font/comfortaa_regular"/>
+                    android:textSize="20dp" />
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="#FFC125"
-                android:nextFocusLeft="@id/relLat"
                 android:layout_marginLeft="10dp"
-                android:fontFamily="@font/comfortaa_regular">
+                android:background="#FFC125"
+                android:fontFamily="@font/comfortaa_regular"
+                android:nextFocusLeft="@id/relLat">
 
 
                 <TextView
@@ -142,12 +176,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
+                    android:fontFamily="@font/comfortaa_regular"
                     android:nextFocusLeft="@id/txtLat"
                     android:text="Longitude"
                     android:textColor="#000"
                     android:textSize="20dp"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/comfortaa_regular"/>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/longField"
@@ -157,11 +191,11 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="0dp"
                     android:ems="6"
+                    android:fontFamily="@font/comfortaa_regular"
                     android:gravity="center"
                     android:padding="3dp"
-                    android:textSize="20dp"
                     android:textColor="#000"
-                    android:fontFamily="@font/comfortaa_regular"/>
+                    android:textSize="20dp" />
 
             </RelativeLayout>
 
@@ -175,170 +209,223 @@
         android:orientation="vertical"
         android:padding="3dp">
 
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="1dp"
-            android:text="temperature"
-            android:textColor="#fff"
-            android:textSize="25dp"
-            android:textStyle="bold"
-            android:fontFamily="@font/comfortaa_regular"/>
+            android:layout_marginLeft="20dp">
+
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="left"
+                android:background="@drawable/button_temperature" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="1dp"
+                android:fontFamily="@font/comfortaa_regular"
+                android:text="  temperature"
+                android:textColor="#fff"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
 
         <!--<EditText-->
-            <!--android:id="@+id/fieldTemperature"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:layout_marginLeft="20dp"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:background="#fff"-->
-            <!--android:ems="6"-->
-            <!--android:nextFocusLeft="@id/fieldTemperature"-->
-            <!--android:padding="2dp" />-->
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
-
-        <SeekBar
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="35dp"
-            android:id="@+id/seekBarTemp"
-            android:padding="5dp"
-            android:progress="50"
-            android:max="100"
-            android:progressTint="#04c1ea"
-            android:thumbTint="#04c1ea"
-
-
-            />
+        <!--android:id="@+id/fieldTemperature"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:layout_marginLeft="20dp"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--android:background="#fff"-->
+        <!--android:ems="6"-->
+        <!--android:nextFocusLeft="@id/fieldTemperature"-->
+        <!--android:padding="2dp" />-->
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#FFC125">
-        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#000"
-            android:layout_marginLeft="10dp"
-            android:textSize="25dp"
-            android:padding="1dp"
-            android:id="@+id/textTemp"
-            android:text="0"
-            android:fontFamily="@font/comfortaa_regular"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#000"
-            android:layout_marginLeft="1dp"
-            android:textSize="25dp"
-            android:padding="1dp"
-            android:text="°"
-            android:fontFamily="@font/comfortaa_regular"/>
-        </LinearLayout>
-    </LinearLayout>
-
-    </LinearLayout>
-
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/door"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="1dp"
-            android:text="door state"
-            android:textColor="#fff"
-            android:textSize="25dp"
-            android:textStyle="bold"
-            android:fontFamily="@font/comfortaa_regular"/>
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="80dp">
-
-        <RadioGroup
-            android:id="@+id/radioGroup"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="28dp"
             android:orientation="horizontal">
 
-            <RadioButton
-                android:id="@+id/radioOpen"
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="130sp"
-                android:layout_height="38dp"
-                android:layout_marginLeft="80dp"
-                android:background="#FFC125"
-                android:buttonTint="#038ca9"
-                android:gravity="center"
-                android:text="OPEN"
-                android:textColor="#000" />
-
-            <RadioButton
-                android:id="@+id/radioClose"
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="130dp"
-                android:layout_height="38dp"
-                android:layout_marginLeft="7dp"
-                android:layout_toRightOf="@+id/radioOpen"
-                android:background="#FFC125"
-                android:buttonTint="#038ca9"
-                android:gravity="center"
-                android:text="CLOSE"
-                android:textColor="#000" />
-        </RadioGroup>
+            <SeekBar
+                android:id="@+id/seekBarTemp"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="35dp"
+                android:max="100"
+                android:padding="5dp"
+                android:progress="50"
+                android:progressTint="#04c1ea"
+                android:thumbTint="#04c1ea"
 
 
-    </RelativeLayout>
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FFC125">
+
+                <TextView
+                    android:id="@+id/textTemp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:fontFamily="@font/comfortaa_regular"
+                    android:padding="1dp"
+                    android:text="0"
+                    android:textColor="#000"
+                    android:textSize="25dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="1dp"
+                    android:fontFamily="@font/comfortaa_regular"
+                    android:padding="1dp"
+                    android:text="°"
+                    android:textColor="#000"
+                    android:textSize="25dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="left"
+                android:background="@drawable/button_door" />
+
+            <TextView
+                android:id="@+id/door"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="1dp"
+                android:fontFamily="@font/comfortaa_regular"
+                android:text="  door state"
+                android:textColor="#fff"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp">
+
+            <RadioGroup
+                android:id="@+id/radioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="28dp"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/radioOpen"
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="130sp"
+                    android:layout_height="38dp"
+                    android:layout_marginLeft="80dp"
+                    android:background="#FFC125"
+                    android:buttonTint="#038ca9"
+                    android:gravity="center"
+                    android:text="OPEN"
+                    android:textColor="#000" />
+
+                <RadioButton
+                    android:id="@+id/radioClose"
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="130dp"
+                    android:layout_height="38dp"
+                    android:layout_marginLeft="7dp"
+                    android:layout_toRightOf="@+id/radioOpen"
+                    android:background="#FFC125"
+                    android:buttonTint="#038ca9"
+                    android:gravity="center"
+                    android:text="CLOSE"
+                    android:textColor="#000" />
+            </RadioGroup>
+
+
+        </RelativeLayout>
+    </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
-        <TextView
+        android:orientation="vertical">
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="battrey"
-            android:textSize="25dp"
-            android:textColor="#fff"/>
+            android:layout_marginLeft="25dp">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="40dp"
-        android:orientation="horizontal"
-        android:padding="2dp"
-        android:layout_marginLeft="286dp"
-        android:background="#FFC125"
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="left"
+                android:background="@drawable/button_battery" />
 
-        >
 
-        <TextView
-            android:id="@+id/battreyText"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/comfortaa_regular"
+                android:text="   battrey"
+                android:textColor="#fff"
+                android:textSize="25dp" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=""
-            android:textAlignment="viewStart"
-            android:textColor="#000"
-            android:textSize="20dp" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="%"
-            android:textAlignment="viewStart"
-            android:textColor="#000"
-            android:textSize="20dp"
-            android:nextFocusLeft="@id/battreyText"/>
-    </LinearLayout>
+            android:layout_marginLeft="275dp"
+            android:layout_marginRight="40dp"
+            android:background="#FFC125"
+            android:orientation="horizontal"
+            android:padding="2dp"
+
+            >
+
+            <TextView
+                android:id="@+id/battreyText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textAlignment="viewStart"
+                android:textColor="#000"
+                android:textSize="20dp"
+                android:fontFamily="@font/comfortaa_regular"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nextFocusLeft="@id/battreyText"
+                android:text="%"
+                android:textAlignment="viewStart"
+                android:textColor="#000"
+                android:textSize="20dp"
+                android:fontFamily="@font/comfortaa_regular"/>
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -346,15 +433,16 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="10dp">
+
         <ToggleButton
+            android:id="@+id/toggleBtn"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:gravity="center"
-            android:id="@+id/toggleBtn"
-            android:textOn="Stop"
-            android:textOff="Transmit"
             android:background="#04c1ea"
+            android:gravity="center"
             android:textColor="#000"
-            />
+            android:textOff="Transmit"
+            android:textOn="Stop"
+            android:fontFamily="@font/comfortaa_regular"/>
     </LinearLayout>
 </LinearLayout>
