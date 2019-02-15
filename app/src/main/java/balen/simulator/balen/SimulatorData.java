@@ -9,7 +9,15 @@ public class SimulatorData {
        // private String location;
         private Double battery;
         //private String datetime;
+        private Double speed;
 
+    public Double getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(Double speeds) {
+        this.speed = speeds;
+    }
 //    public String getLocation() {
 //        return location;
 //    }

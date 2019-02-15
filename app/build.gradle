@@ -32,6 +32,7 @@ dependencies {
     implementation 'com.rabbitmq:amqp-client:4.10.0'
     implementation 'com.google.android.gms:play-services-location:16.0.0'
     implementation 'com.google.android.gms:play-services-maps:16.0.0'
+    implementation 'com.android.support:recyclerview-v7:22.2.1'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'

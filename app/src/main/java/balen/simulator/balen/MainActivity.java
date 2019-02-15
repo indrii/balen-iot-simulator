@@ -10,6 +10,7 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.BatteryManager;
 import android.os.Handler;
@@ -29,6 +30,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -59,12 +61,15 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
 import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
 
+import android.location.LocationManager;
+
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
 
 public class MainActivity extends Activity implements ConnectionCallbacks, OnConnectionFailedListener, LocationListener {
 
     private static final Object RequestPermissionsCode = 1;
+    Context context;
     private GoogleApiClient googleApiClient;
     private EditText device;
     private TextView latitude;
@@ -78,10 +83,13 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
     private TextView battrey;
     private SeekBar seekbar;
     private ToggleButton submitToggle;
+    private TextView speeds;
     private FusedLocationProviderClient fusedLocationProviderClient;
     Thread t;
     private LocationRequest mLocationRequest;
     private final  int min = 50;
+
+    private double speed = 0;
 
     private BroadcastReceiver mBatInfoReceiver = new BroadcastReceiver() {
         @Override
@@ -92,6 +100,9 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
     };
     private boolean mRequestingLocationUpdates = true;
     private boolean suspendPublisher = false;
+    private static final long INTERVAL = 1000 * 2;
+    private static final long FASTEST_INTERVAL = 1000 * 1;
+    static double distance = 0;
 
 
     @Override
@@ -103,14 +114,14 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
         longtitude = (TextView) findViewById(R.id.longField);
         latitude = (TextView) findViewById(R.id.latField);
         temperature = (TextView) findViewById(R.id.textTemp);
-//        submitButton = (Button) findViewById(R.id.buttonSubmitToken);
-//        cancleButton = (Button) findViewById(R.id.buttonCancelToken);
         openRadio = (RadioButton) findViewById(R.id.radioOpen);
         closeRadio = (RadioButton) findViewById(R.id.radioClose);
         doorGroup = (RadioGroup) findViewById(R.id.radioGroup);
         battrey = (TextView) findViewById(R.id.battreyText);
         seekbar = (SeekBar) findViewById(R.id.seekBarTemp);
         submitToggle = (ToggleButton) findViewById(R.id.toggleBtn);
+        speeds = (TextView) findViewById(R.id.txtSpeed);
+
 
         submitToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -159,13 +170,8 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
             public void onStopTrackingTouch(SeekBar seekBar) {
 
             }
-//
-//            public void  setMin(int min){
-//                this.minimumValue = min;
-//            }
-        });
 
-        this.registerReceiver(this.mBatInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        });
 
         googleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
@@ -215,6 +221,8 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
 
                                                     latitude.setText(String.valueOf(location.getLatitude()));
                                                     longtitude.setText(String.valueOf(location.getLongitude()));
+                                                    speeds.setText(String.valueOf(location.getSpeed()));
+
                                                 }
 
                                             }
@@ -237,9 +245,13 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
                                         data.setLongitude(Double.valueOf(longtitude.getText().toString()));
                                     }
 
+
                                     data.setBattery(Double.valueOf(battrey.getText().toString()));
 
 
+                                    if (speeds.getText() != null && !speeds.getText().equals("")){
+                                        data.setSpeed(Double.valueOf(speeds.getText().toString()));
+                                    }
 
                                     if (openRadio.isChecked()) {
                                         data.setDoor(String.valueOf(openRadio.getText().toString()));
@@ -268,17 +280,19 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
             }
         };
 
-//        t.start();
 
-//
-//        submitButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                System.out.println("submit clicked");
-//
-//
-//            }
-//        });
+    }
+
+
+
+
+ // -----------------------------------------------------GPS---------------------------------------------------------------------
+    @Override
+    protected void onStart() {
+        super.onStart();
+        googleApiClient.connect();
+        this.registerReceiver(this.mBatInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+
 
     }
 
@@ -290,60 +304,14 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
 
     private void startLocationUpdates() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            fusedLocationProviderClient.requestLocationUpdates(mLocationRequest, mLocationCallback, null);
+            //fusedLocationProviderClient.requestLocationUpdates(mLocationRequest, mLocationCallback, null);
         }
-    }
-
-    public void submitRepeating(View v) {
-//        //mHandler.postDelayed(mToastRunnable, 1000);
-//        mToastRunnable.run();
-        if(!t.isAlive()){
-            t.start();
-        }
-
-        suspendPublisher = false;
-
-    }
-
-    public void stopRepeating(View v) {
-//        mHandler.removeCallbacks(mToastRunnable);
-        latitude.setText("");
-        longtitude.setText("");
-        temperature.setText("");
-        openRadio.setChecked(false);
-        closeRadio.setChecked(false);
-        device.setText("");
-        seekbar.setProgress(50);
-        if(t.isAlive()){
-            //t.stop();
-        }
-
-        suspendPublisher = true;
-
-    }
-//
-//    private Runnable mToastRunnable = new Runnable() {
-//        @Override
-//        public void run() {
-//            Toast.makeText(MainActivity.this, "Nembakkkkkk", Toast.LENGTH_SHORT).show();
-//            mHandler.postDelayed(this,5000);
-//        }
-//    };
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        googleApiClient.connect();
-
-
-
-
     }
 
     private void createLocationRequest() {
         mLocationRequest = LocationRequest.create();
-        mLocationRequest.setInterval(2000);
-        mLocationRequest.setFastestInterval(2000);
+        mLocationRequest.setInterval(INTERVAL);
+        mLocationRequest.setFastestInterval(FASTEST_INTERVAL);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
     }
 
@@ -353,6 +321,7 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
         if (googleApiClient.isConnected()){
             googleApiClient.disconnect();
         }
+
         unregisterReceiver(this.mBatInfoReceiver);
         super.onStop();
     }
@@ -361,7 +330,12 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
+            try {
+                LocationServices.FusedLocationApi.requestLocationUpdates(
+                        googleApiClient, mLocationRequest, this);
+            }catch (SecurityException e){
 
+            }
     }
 
     private void requestPermissions(){
@@ -384,10 +358,17 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
         @Override
         public void onLocationResult(LocationResult locationResult) {
             super.onLocationResult(locationResult);
+
+            locationResult.getLocations();
             System.out.println("===LOCATION CALLBACK===");
+
+            Location oldLocation = null;
+            Location newLocation = null;
 
             for (Location loc : locationResult.getLocations()) {
                 System.out.println(loc);
+                oldLocation = newLocation;
+                newLocation = loc;
             }
 
             Location location = locationResult.getLastLocation();
@@ -396,23 +377,68 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
             System.out.println("=======================");
 
             if (location != null) {
+
+                if(oldLocation != null && newLocation != null){
+                    speed = calcuSpeed(newLocation, oldLocation);
+                } else if (location.getSpeed() == 0.0f){
+                    speed = location.getSpeed();
+                }
+
                 System.out.println("===GET LOCATION SUCCESS===");
                 System.out.println(location.getLongitude());
                 System.out.println(location.getLatitude());
+                System.out.println(location.getSpeed());
                 System.out.println(new Date(location.getTime()));
                 System.out.println("=========================");
 
                 latitude.setText(String.valueOf(location.getLatitude()));
                 longtitude.setText(String.valueOf(location.getLongitude()));
+                speeds.setText(String.valueOf(location.getSpeed()));
+
+
+
             }
+
+
         }
     };
+
+
 
     @Override
     public void onLocationChanged(Location location) {
 
     }
 
+    public double calcuSpeed(Location mCurrentLocation, Location mOldLocation){
+
+        double newlat = mCurrentLocation.getLatitude();
+        double newLon = mCurrentLocation.getLongitude();
+
+        double oldLat = mOldLocation.getLatitude();
+        double oldLon = mOldLocation.getLongitude();
+
+        if (mCurrentLocation.hasSpeed()){
+            return mCurrentLocation.getSpeed();
+        }else {
+            double radius = 6371000;
+            double dLat = Math.toRadians(newlat-oldLat);
+            double dLon = Math.toRadians(newLon-oldLon);
+            double a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                        Math.cos(Math.toRadians((newlat))) * Math.cos(Math.toRadians(oldLat)) *
+                                Math.sin(dLon/2) * Math.sin(dLon/2);
+            double c = 2 * Math.asin(Math.sqrt(a));
+            double distance = Math.round(radius * c);
+
+            double timeDiffrent = mCurrentLocation.getTime() - mOldLocation.getTime();
+            return distance/timeDiffrent;
+
+        }
+    };
+
+
+
+//----------------------------------------------------send data to queque----------------------------------------------------------
     private class PublisherTask extends AsyncTask<String, Void, Long> {
 
         Channel channel;

@@ -38,13 +38,18 @@
             android:layout_marginLeft="20dp"
             android:fontFamily="@font/comfortaa_regular"
             android:nextFocusLeft="@id/blnLogo"
-            android:text="commender"
+            android:text="commander"
             android:textColor="#fff"
             android:textSize="40dp" />
 
     </LinearLayout>
-
-
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -429,6 +434,65 @@
     </LinearLayout>
 
     <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="left"
+                android:background="@drawable/speed" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/comfortaa_regular"
+                android:text="   speed"
+                android:textColor="#fff"
+                android:textSize="25dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="250dp"
+            android:layout_marginRight="40dp"
+            android:background="#FFC125"
+            android:orientation="horizontal"
+            android:padding="2dp"
+
+            >
+
+            <TextView
+                android:id="@+id/txtSpeed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textAlignment="viewStart"
+                android:textColor="#000"
+                android:textSize="20dp"
+                android:fontFamily="@font/comfortaa_regular"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nextFocusLeft="@id/txtSpeed"
+                android:text="Km/h"
+                android:textAlignment="viewStart"
+                android:textColor="#000"
+                android:textSize="20dp"
+                android:fontFamily="@font/comfortaa_regular"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -445,4 +509,6 @@
             android:textOn="Stop"
             android:fontFamily="@font/comfortaa_regular"/>
     </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
