@@ -219,6 +219,8 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
                                                     longtitude.setText(String.valueOf(location.getLongitude()));
                                                     speedText.setText(String.valueOf(location.getSpeed()));
 
+
+
                                                 }
 
                                             }
