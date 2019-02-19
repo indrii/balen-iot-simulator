@@ -83,14 +83,16 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
     private TextView battrey;
     private SeekBar seekbar;
     private ToggleButton submitToggle;
-    private TextView speeds;
+    private TextView speedText;
     private FusedLocationProviderClient fusedLocationProviderClient;
     Thread t;
     private LocationRequest mLocationRequest;
     private final  int min = 50;
-
-    private double speed = 0;
-
+    private boolean mRequestingLocationUpdates = true;
+    private boolean suspendPublisher = false;
+    private static final long INTERVAL = 1000 * 2;
+    private static final long FASTEST_INTERVAL = 1000 * 1;
+//    static double distance = 0;
     private BroadcastReceiver mBatInfoReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -98,12 +100,6 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
             battrey.setText(String.valueOf(level));
         }
     };
-    private boolean mRequestingLocationUpdates = true;
-    private boolean suspendPublisher = false;
-    private static final long INTERVAL = 1000 * 2;
-    private static final long FASTEST_INTERVAL = 1000 * 1;
-    static double distance = 0;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,7 +116,7 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
         battrey = (TextView) findViewById(R.id.battreyText);
         seekbar = (SeekBar) findViewById(R.id.seekBarTemp);
         submitToggle = (ToggleButton) findViewById(R.id.toggleBtn);
-        speeds = (TextView) findViewById(R.id.txtSpeed);
+        speedText = (TextView) findViewById(R.id.txtSpeed);
 
 
         submitToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -221,7 +217,7 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
 
                                                     latitude.setText(String.valueOf(location.getLatitude()));
                                                     longtitude.setText(String.valueOf(location.getLongitude()));
-                                                    speeds.setText(String.valueOf(location.getSpeed()));
+                                                    speedText.setText(String.valueOf(location.getSpeed()));
 
                                                 }
 
@@ -249,8 +245,8 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
                                     data.setBattery(Double.valueOf(battrey.getText().toString()));
 
 
-                                    if (speeds.getText() != null && !speeds.getText().equals("")){
-                                        data.setSpeed(Double.valueOf(speeds.getText().toString()));
+                                    if (speedText.getText() != null && !speedText.getText().equals("")){
+                                        data.setSpeed(Double.valueOf(speedText.getText().toString()));
                                     }
 
                                     if (openRadio.isChecked()) {
@@ -312,12 +308,12 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
         mLocationRequest = LocationRequest.create();
         mLocationRequest.setInterval(INTERVAL);
         mLocationRequest.setFastestInterval(FASTEST_INTERVAL);
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
     }
 
     @Override
     protected void onStop(){
-        fusedLocationProviderClient.removeLocationUpdates(mLocationCallback);
+        //fusedLocationProviderClient.removeLocationUpdates(mLocationCallback);
         if (googleApiClient.isConnected()){
             googleApiClient.disconnect();
         }
@@ -338,6 +334,8 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
             }
     }
 
+
+
     private void requestPermissions(){
         ActivityCompat.requestPermissions(MainActivity.this, new
                 String[]{ACCESS_FINE_LOCATION}, (Integer) RequestPermissionsCode);
@@ -354,59 +352,69 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
         Log.e("MainActivity","Connection failed :" + connectionResult.getErrorCode());
     }
 
-    private LocationCallback mLocationCallback = new LocationCallback() {
-        @Override
-        public void onLocationResult(LocationResult locationResult) {
-            super.onLocationResult(locationResult);
-
-            locationResult.getLocations();
-            System.out.println("===LOCATION CALLBACK===");
-
-            Location oldLocation = null;
-            Location newLocation = null;
-
-            for (Location loc : locationResult.getLocations()) {
-                System.out.println(loc);
-                oldLocation = newLocation;
-                newLocation = loc;
-            }
-
-            Location location = locationResult.getLastLocation();
-            System.out.println("===LAST LOCATION===");
-            System.out.println(location);
-            System.out.println("=======================");
-
-            if (location != null) {
-
-                if(oldLocation != null && newLocation != null){
-                    speed = calcuSpeed(newLocation, oldLocation);
-                } else if (location.getSpeed() == 0.0f){
-                    speed = location.getSpeed();
-                }
-
-                System.out.println("===GET LOCATION SUCCESS===");
-                System.out.println(location.getLongitude());
-                System.out.println(location.getLatitude());
-                System.out.println(location.getSpeed());
-                System.out.println(new Date(location.getTime()));
-                System.out.println("=========================");
-
-                latitude.setText(String.valueOf(location.getLatitude()));
-                longtitude.setText(String.valueOf(location.getLongitude()));
-                speeds.setText(String.valueOf(location.getSpeed()));
-
-
-
-            }
-
-
-        }
-    };
+//    private LocationCallback mLocationCallback = new LocationCallback() {
+//        @Override
+//        public void onLocationResult(LocationResult locationResult) {
+//            super.onLocationResult(locationResult);
+//
+//            locationResult.getLocations();
+//            System.out.println("===LOCATION CALLBACK===");
+//
+//            Location oldLocation = null;
+//            Location newLocation = null;
+//
+//            for (Location loc : locationResult.getLocations()) {
+//                System.out.println(loc);
+//                oldLocation = newLocation;
+//                newLocation = loc;
+//            }
+//
+//            Location location = locationResult.getLastLocation();
+//            System.out.println("===LAST LOCATION===");
+//            System.out.println(location);
+//            System.out.println("=======================");
+//
+//            if (location != null) {
+//
+//                if(oldLocation != null && newLocation != null){
+//                    speed = calcuSpeed(newLocation, oldLocation);
+//                } else if (location.getSpeed() == 0.0f){
+//                    speed = location.getSpeed();
+//                }
+//
+//                System.out.println("===GET LOCATION SUCCESS===");
+//                System.out.println(location.getLongitude());
+//                System.out.println(location.getLatitude());
+//                System.out.println(location.getSpeed());
+//                System.out.println(new Date(location.getTime()));
+//                System.out.println("=========================");
+//
+//                latitude.setText(String.valueOf(location.getLatitude()));
+//                longtitude.setText(String.valueOf(location.getLongitude()));
+//                speedText.setText(String.valueOf(location.getSpeed()));
+//
+//
+//
+//            }
+//
+//
+//        }
+//    };
 
 
 
     @Override
     public void onLocationChanged(Location location) {
+//
+//            mCurrentLocation = location;
+//        if (lStart == null) {
+//            lStart = mCurrentLocation;
+//            lEnd = mCurrentLocation;
+//        } else
+//            lEnd = mCurrentLocation;
+//
+//        speed = location.getSpeed() * 18/5;
+
 
     }
 
