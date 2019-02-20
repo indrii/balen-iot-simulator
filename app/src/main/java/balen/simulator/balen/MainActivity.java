@@ -451,7 +451,7 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
                 factory.setVirtualHost("mevkewre");
                 conn = factory.newConnection();
                 channel = conn.createChannel();
-                channel.basicPublish("balena.dev", "null", MessageProperties.TEXT_PLAIN,strings[0].getBytes("UTF-8"));
+                channel.basicPublish(getResources().getString(R.string.amqp_exchange), "null", MessageProperties.TEXT_PLAIN,strings[0].getBytes("UTF-8"));
                 channel.close();
                 conn.close();
             } catch (IOException e) {
