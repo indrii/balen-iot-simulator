@@ -43,13 +43,16 @@
             android:textSize="28dp" />
 
     </LinearLayout>
+
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
+
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:orientation="vertical">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -59,43 +62,50 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp">
+                    android:layout_marginLeft="20dp"
+                    android:orientation="horizontal">
 
 
                     <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_gravity="left"
                         android:background="@drawable/button_device" />
-
-                    <TextView
-                        android:id="@+id/textDevice"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="1dp"
-                        android:fontFamily="@font/comfortaa_regular"
-                        android:text="   device"
-                        android:textColor="#fff"
-                        android:textSize="25dp"
-                        android:textStyle="bold" />
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textDevice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:fontFamily="@font/comfortaa_regular"
+                            android:text="device"
+                            android:textColor="#fff"
+                            android:textSize="15dp"
+                            />
+                        <EditText
+                            android:id="@+id/deviceField"
+                            android:layout_width="160dp"
+                            android:layout_height="28dp"
+                            android:layout_gravity="bottom"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/bgedit"
+                            android:drawablePadding="10dp"
+                            android:textSize="15dp"
+                            android:fontFamily="@font/comfortaa_regular"
+                            android:padding="4dp"
+                            android:textColor="#000" />
+                    </LinearLayout>
+
                 </LinearLayout>
+
+
             </LinearLayout>
 
-            <EditText
-                android:id="@+id/deviceField"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="50dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:ems="16"
-                android:fontFamily="@font/comfortaa_regular"
-                android:padding="4dp"
-                android:textColor="#000"
-                android:drawablePadding="10dp"
-                android:drawableStart="@drawable/boxedit"
-                />
 
 
             <LinearLayout
@@ -108,104 +118,283 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp">
+                    android:layout_marginLeft="20dp"
+                    android:orientation="horizontal">
 
 
                     <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_gravity="left"
                         android:background="@drawable/button_location" />
-
-                    <TextView
-                        android:id="@+id/txtPoint"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:fontFamily="@font/comfortaa_regular"
-                        android:text="   location"
-                        android:textColor="#fff"
-                        android:textSize="25dp"
-                        android:textStyle="bold" />
+                        android:orientation="vertical"
+                        >
+                        <TextView
+                            android:id="@+id/txtPoint"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/comfortaa_regular"
+                            android:text="location"
+                            android:textColor="#fff"
+                            android:textSize="15dp"
+                            android:layout_marginLeft="5dp"
+                            />
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp">
+
+                            <RelativeLayout
+                                android:id="@+id/relLat"
+                                android:layout_width="150dp"
+                                android:layout_height="35dp"
+                                android:layout_marginLeft="5dp"
+                                android:background="@drawable/bglocation">
+
+                                <TextView
+                                    android:id="@+id/txtLat"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="40dp"
+                                    android:fontFamily="@font/comfortaa_regular"
+                                    android:text="Latitude"
+                                    android:textColor="#000"
+                                    android:textSize="15dp"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/latField"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@id/txtLat"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_marginEnd="0dp"
+                                    android:ems="9"
+                                    android:fontFamily="@font/comfortaa_regular"
+                                    android:gravity="center"
+                                    android:padding="3dp"
+                                    android:textColor="#000"
+                                    android:textSize="15dp" />
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:layout_width="150dp"
+                                android:layout_height="35dp"
+                                android:layout_marginLeft="10dp"
+                                android:background="@drawable/bglocation"
+                                android:fontFamily="@font/comfortaa_regular"
+                                android:nextFocusLeft="@id/relLat">
+
+
+                                <TextView
+                                    android:id="@+id/txtLon"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="33dp"
+                                    android:fontFamily="@font/comfortaa_regular"
+                                    android:nextFocusLeft="@id/txtLat"
+                                    android:text="Longitude"
+                                    android:textColor="#000"
+                                    android:textSize="15dp"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/longField"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@id/txtLon"
+                                    android:layout_marginTop="0dp"
+                                    android:ems="9"
+                                    android:fontFamily="@font/comfortaa_regular"
+                                    android:gravity="center"
+                                    android:padding="3dp"
+                                    android:textColor="#000"
+                                    android:textSize="15dp" />
+
+                            </RelativeLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
                 </LinearLayout>
 
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="3dp">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp">
+                    android:layout_marginLeft="20dp"
+                    android:orientation="horizontal">
 
-                    <RelativeLayout
-                        android:id="@+id/relLat"
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="left"
+                        android:background="@drawable/button_temperature" />
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="50dp"
-                        android:background="#FFC125">
-
+                        android:orientation="vertical">
                         <TextView
-                            android:id="@+id/txtLat"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="25dp"
                             android:fontFamily="@font/comfortaa_regular"
-                            android:text="Latitude"
-                            android:textColor="#000"
-                            android:textSize="20dp"
-                            android:textStyle="bold" />
+                            android:text="temperature"
+                            android:textColor="#fff"
+                            android:textSize="15dp"
+                            android:layout_marginLeft="5dp"
+                            />
 
-                        <TextView
-                            android:id="@+id/latField"
+                        <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@id/txtLat"
-                            android:ems="6"
-                            android:fontFamily="@font/comfortaa_regular"
-                            android:gravity="center"
-                            android:padding="3dp"
-                            android:textColor="#000"
-                            android:textSize="20dp" />
-                    </RelativeLayout>
+                            android:orientation="horizontal"
+                            >
 
-                    <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:background="#FFC125"
-                        android:fontFamily="@font/comfortaa_regular"
-                        android:nextFocusLeft="@id/relLat">
+                            <SeekBar
+                                android:id="@+id/seekBarTemp"
+                                android:layout_width="250dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:max="100"
+                                android:padding="5dp"
+                                android:progress="50"
+                                android:progressTint="#04c1ea"
+                                android:thumbTint="#04c1ea"
 
 
-                        <TextView
-                            android:id="@+id/txtLon"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:fontFamily="@font/comfortaa_regular"
-                            android:nextFocusLeft="@id/txtLat"
-                            android:text="Longitude"
-                            android:textColor="#000"
-                            android:textSize="20dp"
-                            android:textStyle="bold" />
+                                />
 
-                        <TextView
-                            android:id="@+id/longField"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/txtLon"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="0dp"
-                            android:ems="6"
-                            android:fontFamily="@font/comfortaa_regular"
-                            android:gravity="center"
-                            android:padding="3dp"
-                            android:textColor="#000"
-                            android:textSize="20dp" />
+                            <LinearLayout
+                                android:layout_width="32dp"
+                                android:layout_height="25dp"
+                                android:background="@drawable/bgkotak"
+                                android:layout_gravity="center">
 
-                    </RelativeLayout>
+                                <TextView
+                                    android:id="@+id/textTemp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="2dp"
+                                    android:fontFamily="@font/comfortaa_regular"
+                                    android:padding="1dp"
+                                    android:text="0"
+                                    android:textColor="#000"
+                                    android:textSize="15dp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/comfortaa_regular"
+                                    android:padding="1dp"
+                                    android:text="°"
+                                    android:textColor="#000"
+                                    android:textSize="15dp" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
 
                 </LinearLayout>
+
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:orientation="vertical"
+                android:padding="3dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:background="@drawable/button_door" />
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/door"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="1dp"
+                            android:layout_marginLeft="5dp"
+                            android:fontFamily="@font/comfortaa_regular"
+                            android:text="door state"
+                            android:textColor="#fff"
+                            android:textSize="15dp"
+                            />
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <RadioGroup
+                                android:id="@+id/radioGroup"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginBottom="28dp"
+                                android:orientation="horizontal">
+
+                                <RadioButton
+                                    android:id="@+id/radioOpen"
+                                    style="?android:attr/buttonStyleSmall"
+                                    android:layout_width="130sp"
+                                    android:layout_height="35dp"
+                                    android:layout_marginLeft="5dp"
+                                    android:background="@drawable/bgkotak"
+                                    android:buttonTint="#038ca9"
+                                    android:gravity="center"
+                                    android:text="OPEN"
+                                    android:textColor="#000"
+                                    android:textSize="15dp"/>
+
+                                <RadioButton
+                                    android:id="@+id/radioClose"
+                                    style="?android:attr/buttonStyleSmall"
+                                    android:layout_width="130dp"
+                                    android:layout_height="35dp"
+                                    android:layout_marginLeft="7dp"
+                                    android:layout_toRightOf="@+id/radioOpen"
+                                    android:background="@drawable/bgkotak"
+                                    android:buttonTint="#038ca9"
+                                    android:gravity="center"
+                                    android:text="CLOSE"
+                                    android:textColor="#000"
+                                    android:textSize="15dp"/>
+                            </RadioGroup>
+
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
 
             </LinearLayout>
 
@@ -220,277 +409,130 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp">
 
-
                     <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_gravity="left"
-                        android:background="@drawable/button_temperature" />
-
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="1dp"
-                        android:fontFamily="@font/comfortaa_regular"
-                        android:text="  temperature"
-                        android:textColor="#fff"
-                        android:textSize="25dp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-
-                <!--<EditText-->
-                <!--android:id="@+id/fieldTemperature"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_gravity="center"-->
-                <!--android:layout_marginLeft="20dp"-->
-                <!--android:layout_marginTop="10dp"-->
-                <!--android:background="#fff"-->
-                <!--android:ems="6"-->
-                <!--android:nextFocusLeft="@id/fieldTemperature"-->
-                <!--android:padding="2dp" />-->
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <SeekBar
-                        android:id="@+id/seekBarTemp"
-                        android:layout_width="250dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="35dp"
-                        android:max="100"
-                        android:padding="5dp"
-                        android:progress="50"
-                        android:progressTint="#04c1ea"
-                        android:thumbTint="#04c1ea"
-
-
-                        />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="#FFC125">
-
-                        <TextView
-                            android:id="@+id/textTemp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:fontFamily="@font/comfortaa_regular"
-                            android:padding="1dp"
-                            android:text="0"
-                            android:textColor="#000"
-                            android:textSize="25dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="1dp"
-                            android:fontFamily="@font/comfortaa_regular"
-                            android:padding="1dp"
-                            android:text="°"
-                            android:textColor="#000"
-                            android:textSize="25dp" />
-                    </LinearLayout>
-                </LinearLayout>
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="25dp">
-
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_gravity="left"
-                        android:background="@drawable/button_door" />
-
-                    <TextView
-                        android:id="@+id/door"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="1dp"
-                        android:fontFamily="@font/comfortaa_regular"
-                        android:text="  door state"
-                        android:textColor="#fff"
-                        android:textSize="25dp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp">
-
-                    <RadioGroup
-                        android:id="@+id/radioGroup"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="28dp"
-                        android:orientation="horizontal">
-
-                        <RadioButton
-                            android:id="@+id/radioOpen"
-                            style="?android:attr/buttonStyleSmall"
-                            android:layout_width="130sp"
-                            android:layout_height="38dp"
-                            android:layout_marginLeft="80dp"
-                            android:background="#FFC125"
-                            android:buttonTint="#038ca9"
-                            android:gravity="center"
-                            android:text="OPEN"
-                            android:textColor="#000" />
-
-                        <RadioButton
-                            android:id="@+id/radioClose"
-                            style="?android:attr/buttonStyleSmall"
-                            android:layout_width="130dp"
-                            android:layout_height="38dp"
-                            android:layout_marginLeft="7dp"
-                            android:layout_toRightOf="@+id/radioOpen"
-                            android:background="#FFC125"
-                            android:buttonTint="#038ca9"
-                            android:gravity="center"
-                            android:text="CLOSE"
-                            android:textColor="#000" />
-                    </RadioGroup>
-
-
-                </RelativeLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="25dp">
-
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_gravity="left"
                         android:background="@drawable/button_battery" />
 
-
-                    <TextView
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:fontFamily="@font/comfortaa_regular"
-                        android:text="   battrey"
-                        android:textColor="#fff"
-                        android:textSize="25dp" />
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/comfortaa_regular"
+                            android:text="battery"
+                            android:textColor="#fff"
+                            android:textSize="15dp"
+                            android:layout_marginLeft="5dp"
+                            />
+                        <LinearLayout
+                            android:layout_width="40dp"
+                            android:layout_height="25dp"
+                            android:layout_marginLeft="232dp"
+                            android:background="@drawable/bgkotak"
+                            android:orientation="horizontal"
+                            android:padding="2dp"
+
+                            >
+
+                            <TextView
+                                android:id="@+id/battreyText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/comfortaa_regular"
+                                android:text=""
+                                android:textAlignment="viewStart"
+                                android:textColor="#000"
+                                android:textSize="15dp" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/comfortaa_regular"
+                                android:nextFocusLeft="@id/battreyText"
+                                android:text="%"
+                                android:textAlignment="viewStart"
+                                android:textColor="#000"
+                                android:textSize="15dp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="275dp"
-                    android:layout_marginRight="40dp"
-                    android:background="#FFC125"
-                    android:orientation="horizontal"
-                    android:padding="2dp"
 
-                    >
-
-                    <TextView
-                        android:id="@+id/battreyText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=""
-                        android:textAlignment="viewStart"
-                        android:textColor="#000"
-                        android:textSize="20dp"
-                        android:fontFamily="@font/comfortaa_regular"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:nextFocusLeft="@id/battreyText"
-                        android:text="%"
-                        android:textAlignment="viewStart"
-                        android:textColor="#000"
-                        android:textSize="20dp"
-                        android:fontFamily="@font/comfortaa_regular"/>
-                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="3dp">
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="25dp">
+                    android:layout_marginLeft="20dp">
 
                     <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_gravity="left"
                         android:background="@drawable/speed" />
 
-
-                    <TextView
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:fontFamily="@font/comfortaa_regular"
-                        android:text="   speed"
-                        android:textColor="#fff"
-                        android:textSize="25dp" />
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:fontFamily="@font/comfortaa_regular"
+                            android:text="speed"
+                            android:textColor="#fff"
+                            android:textSize="15dp"
+                            />
+                        <LinearLayout
+                            android:layout_width="65dp"
+                            android:layout_height="25dp"
+                            android:layout_marginLeft="206dp"
+                            android:background="@drawable/bgkotak"
+                            android:orientation="horizontal"
+                            android:padding="2dp"
+
+                            >
+
+                            <TextView
+                                android:id="@+id/txtSpeed"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/comfortaa_regular"
+                                android:text=""
+                                android:textAlignment="viewStart"
+                                android:textColor="#000"
+                                android:textSize="15dp" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/comfortaa_regular"
+                                android:nextFocusLeft="@id/txtSpeed"
+                                android:text="Km/h"
+                                android:textAlignment="viewStart"
+                                android:textColor="#000"
+                                android:textSize="15dp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="245dp"
-                    android:layout_marginRight="40dp"
-                    android:background="#FFC125"
-                    android:orientation="horizontal"
-                    android:padding="2dp"
 
-                    >
-
-                    <TextView
-                        android:id="@+id/txtSpeed"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=""
-                        android:textAlignment="viewStart"
-                        android:textColor="#000"
-                        android:textSize="20dp"
-                        android:fontFamily="@font/comfortaa_regular"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:nextFocusLeft="@id/txtSpeed"
-                        android:text="Km/h"
-                        android:textAlignment="viewStart"
-                        android:textColor="#000"
-                        android:textSize="20dp"
-                        android:fontFamily="@font/comfortaa_regular"/>
-                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -503,12 +545,14 @@
                     android:id="@+id/toggleBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
-                    android:background="#04c1ea"
+                    android:background="@drawable/bgtrans"
+                    android:fontFamily="@font/comfortaa_regular"
                     android:gravity="center"
-                    android:textColor="#000"
+                    android:textColor="#fff"
                     android:textOff="Transmit"
                     android:textOn="Stop"
-                    android:fontFamily="@font/comfortaa_regular"/>
+                    android:textSize="15dp"
+                    />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

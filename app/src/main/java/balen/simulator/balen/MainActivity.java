@@ -109,7 +109,7 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
                     if(!t.isAlive()){
                         t.start();
                     }
-                    submitToggle.setBackgroundColor(Color.RED);
+                    submitToggle.setBackgroundColor(Color.rgb(251,89,19));
 
                     suspendPublisher = false;
                 }else{
@@ -123,7 +123,7 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
                     if(t.isAlive()){
                         //t.stop();
                     }
-                    submitToggle.setBackgroundColor(Color.rgb(8,80,118));
+                    submitToggle.setBackgroundColor(Color.rgb(15,229,213));
 
                     suspendPublisher = true;
                 }
