@@ -5,7 +5,7 @@ public class SimulatorData {
         private Double temperature;
         private Double latitude;
         private Double longitude;
-        private String door;
+        private String doorState;
        // private String location;
         private Double battery;
         //private String datetime;
@@ -66,8 +66,8 @@ public class SimulatorData {
         this.latitude = latitude;
     }
 
-    public String getDoor() {
-        return door;
+    public String getDoorState() {
+        return doorState;
     }
 
     public Double getLongitude() {
@@ -78,7 +78,7 @@ public class SimulatorData {
         this.longitude = longitude;
     }
 
-    public void setDoor(String door) {
-        this.door = door;
+    public void setDoorState(String doorState) {
+        this.doorState = doorState;
     }
 }

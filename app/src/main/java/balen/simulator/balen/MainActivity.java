@@ -1,7 +1,6 @@
 package balen.simulator.balen;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -10,19 +9,15 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
-import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.BatteryManager;
-import android.os.Handler;
-import android.os.Looper;
+import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -30,38 +25,26 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
+import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
 import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.location.LocationSettingsRequest;
-import com.google.android.gms.location.LocationSettingsResponse;
-import com.google.android.gms.location.SettingsClient;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.Channel;
-
-
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.MessageProperties;
 
 import java.io.IOException;
 import java.util.Date;
 import java.util.concurrent.TimeoutException;
-
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
-import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
-
-import android.location.LocationManager;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
@@ -251,12 +234,11 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
                                         data.setSpeed(Double.valueOf(speedText.getText().toString()));
                                     }
 
-                                    if (openRadio.isChecked()) {
-                                        data.setDoor(String.valueOf(openRadio.getText().toString()));
-                                    } else if (closeRadio.isChecked()) {
-                                        data.setDoor(String.valueOf(closeRadio.getText().toString()));
-                                    }
-
+                                    String checked = ((RadioButton)findViewById(doorGroup.getCheckedRadioButtonId())).getText().toString();
+                                    System.out.println("===CHECKED===");
+                                    System.out.println(checked);
+                                    System.out.println("=============");
+                                    data.setDoorState(checked);
 
                                     ObjectMapper mapper = new ObjectMapper();
 
@@ -471,10 +453,7 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
                 factory.setVirtualHost("mevkewre");
                 conn = factory.newConnection();
                 channel = conn.createChannel();
-                channel.exchangeDeclare("(AMQP default)", "direct", true);
-                channel.queueDeclare("STG.BALENA_REQUEST",true,false,false,null);
-                channel.queueBind("STG.BALENA_REQUEST", "(AMQP default)", "null" );
-                channel.basicPublish("(AMQP default)", "null", MessageProperties.TEXT_PLAIN,strings[0].getBytes("UTF-8"));
+                channel.basicPublish(getResources().getString(R.string.amqp_exchange), "null", MessageProperties.TEXT_PLAIN,strings[0].getBytes("UTF-8"));
                 channel.close();
                 conn.close();
             } catch (IOException e) {
