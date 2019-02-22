@@ -143,7 +143,10 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
                     radioRem.setChecked(false);
                     radioTidak.setChecked(false);
                     device.setText("");
-                    imei.setText("");
+
+                    if (imei != null){
+                        imei.setText("");
+                    }
                     speedText.setText("");
                     seekbar.setProgress(50);
                     if(t.isAlive()){
@@ -261,7 +264,11 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
                                 }
 
                                 if (!suspendPublisher){
-                                    imei.setText(String.valueOf(getImeiNumber()));
+
+                                    if(imei != null){
+                                        imei.setText(String.valueOf(getImeiNumber()));
+                                    }
+
                                     SimulatorData data = new SimulatorData();
                                     data.setDeviceId(String.valueOf(device.getText().toString()));
 
@@ -275,7 +282,10 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
                                         data.setLongitude(Double.valueOf(longtitude.getText().toString()));
                                     }
 
-                                    data.setImei(String.valueOf(imei.getText().toString()));
+                                    if(imei != null){
+                                        data.setImei(String.valueOf(imei.getText().toString()));
+                                    }
+
                                     if (humadity.getText() != null && !humadity.getText().toString().isEmpty()) {
                                         data.setHumadity(Double.valueOf(humadity.getText().toString()));
                                     }
@@ -288,7 +298,15 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
                                         data.setSpeed(Double.valueOf(speedText.getText().toString()));
                                     }
 
-                                    String checked = ((RadioButton)findViewById(doorGroup.getCheckedRadioButtonId())).getText().toString();
+                                    String checked = null;
+
+                                    if (doorGroup.getCheckedRadioButtonId() == closeRadio.getId()){
+                                      checked = "CLOSE";
+                                    } else if (doorGroup.getCheckedRadioButtonId() == openRadio.getId()){
+                                        checked = "OPEN";
+                                    }
+
+
                                     System.out.println("===CHECKED===");
                                     System.out.println(checked);
                                     System.out.println("=============");

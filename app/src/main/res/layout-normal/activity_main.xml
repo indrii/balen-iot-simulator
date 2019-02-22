@@ -29,7 +29,7 @@
             android:maxWidth="110dp"
             android:maxHeight="45dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/balen2" />
+            android:src="@drawable/balen" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -442,12 +442,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="25dp">
 
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_gravity="left"
-                        android:background="@drawable/speed" />
-
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -500,11 +494,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp">
 
-                        <ImageView
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_gravity="left"
-                            android:background="@drawable/speed" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -669,7 +658,7 @@
                                 android:text=""
                                 android:textAlignment="viewStart"
                                 android:textColor="#000"
-                                android:textSize="20dp"/>
+                                android:textSize="15sp"/>
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -679,7 +668,7 @@
                                 android:text="km/l"
                                 android:textAlignment="viewStart"
                                 android:textColor="#000"
-                                android:textSize="20dp" />
+                                android:textSize="15sp" />
 
                         </LinearLayout>
                     </LinearLayout>
