@@ -198,9 +198,11 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
                                                     System.out.println(new Date(location.getTime()));
                                                     System.out.println("=========================");
 
+                                                    Double speedInKPH = Double.valueOf(location.getSpeed()*18/5);
+
                                                     latitude.setText(String.valueOf(location.getLatitude()));
                                                     longtitude.setText(String.valueOf(location.getLongitude()));
-                                                    speedText.setText(String.valueOf(location.getSpeed()));
+                                                    speedText.setText(String.valueOf(speedInKPH));
 
 
 
