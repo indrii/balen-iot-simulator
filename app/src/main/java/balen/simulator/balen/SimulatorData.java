@@ -14,6 +14,15 @@ public class SimulatorData {
         private Double bensin;
         //private String datetime;
         private Double speed;
+        private String imei;
+
+    public String getImei() {
+        return imei;
+    }
+
+    public void setImei(String imei) {
+        this.imei = imei;
+    }
 
     public Double getSpeed() {
         return speed;
