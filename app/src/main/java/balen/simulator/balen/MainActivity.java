@@ -75,13 +75,19 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
     private TextView latitude;
     private TextView longtitude;
     private TextView temperature;
+    private TextView humadity;
     private Button submitButton;
     private Button cancleButton;
     private RadioButton openRadio;
     private RadioButton closeRadio;
+    private RadioButton radioRem;
+    private RadioButton radioTidak;
     private RadioGroup doorGroup;
+    private RadioGroup brakeGroup;
     private TextView battrey;
+    private TextView bensin;
     private SeekBar seekbar;
+    private SeekBar seekbarHuma;
     private ToggleButton submitToggle;
     private TextView speedText;
     private FusedLocationProviderClient fusedLocationProviderClient;
@@ -112,11 +118,17 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
         temperature = (TextView) findViewById(R.id.textTemp);
         openRadio = (RadioButton) findViewById(R.id.radioOpen);
         closeRadio = (RadioButton) findViewById(R.id.radioClose);
+        radioRem = (RadioButton) findViewById(R.id.radioRem);
+        radioTidak = (RadioButton) findViewById(R.id.radioTidak);
         doorGroup = (RadioGroup) findViewById(R.id.radioGroup);
         battrey = (TextView) findViewById(R.id.battreyText);
+        bensin = (TextView) findViewById(R.id.bensinText);
         seekbar = (SeekBar) findViewById(R.id.seekBarTemp);
+        seekbarHuma = (SeekBar) findViewById(R.id.seekBarHuma);
         submitToggle = (ToggleButton) findViewById(R.id.toggleBtn);
         speedText = (TextView) findViewById(R.id.txtSpeed);
+        humadity = (TextView) findViewById(R.id.txtHuma);
+
 
 
         submitToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -125,6 +137,7 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
                 if (b){
                     if(!t.isAlive()){
                         t.start();
+
                     }
                     submitToggle.setBackgroundColor(Color.RED);
 
@@ -133,12 +146,16 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
                     latitude.setText("");
                     longtitude.setText("");
                     temperature.setText("");
+                    humadity.setText("");
                     openRadio.setChecked(false);
                     closeRadio.setChecked(false);
+                    radioRem.setChecked(false);
+                    radioTidak.setChecked(false);
                     device.setText("");
                     seekbar.setProgress(50);
                     if(t.isAlive()){
                         //t.stop();
+
                     }
                     submitToggle.setBackgroundColor(Color.rgb(8,80,118));
 
@@ -154,6 +171,7 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
 
                 int buffer = progress - min;
                 temperature.setText(""+ buffer + "");
+
             }
 
             @Override
@@ -167,6 +185,23 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
 
             }
 
+        });
+        seekbarHuma.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
+                int buffer = progress - min;
+                humadity.setText(""   + buffer + "");
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
         });
 
         googleApiClient = new GoogleApiClient.Builder(this)
@@ -240,9 +275,12 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
                                     if (longtitude.getText() != null && !longtitude.getText().equals("")) {
                                         data.setLongitude(Double.valueOf(longtitude.getText().toString()));
                                     }
-
+                                    if (humadity.getText() != null && !humadity.getText().toString().isEmpty()) {
+                                        data.setHumadity(Double.valueOf(humadity.getText().toString()));
+                                    }
 
                                     data.setBattery(Double.valueOf(battrey.getText().toString()));
+
 
 
                                     if (speedText.getText() != null && !speedText.getText().equals("")){
@@ -253,6 +291,11 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
                                         data.setDoor(String.valueOf(openRadio.getText().toString()));
                                     } else if (closeRadio.isChecked()) {
                                         data.setDoor(String.valueOf(closeRadio.getText().toString()));
+                                    }
+                                    if (radioRem.isChecked()) {
+                                        data.setBrake(String.valueOf(radioRem.getText().toString()));
+                                    } else if (radioTidak.isChecked()) {
+                                        data.setBrake(String.valueOf(radioTidak.getText().toString()));
                                     }
 
 

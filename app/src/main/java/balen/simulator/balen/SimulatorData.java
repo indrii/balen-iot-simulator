@@ -3,11 +3,14 @@ package balen.simulator.balen;
 public class SimulatorData {
         private String deviceId;
         private Double temperature;
+        private Double humadity;
         private Double latitude;
         private Double longitude;
         private String door;
+        private String brake;
        // private String location;
         private Double battery;
+        private Double bensin;
         //private String datetime;
         private Double speed;
 
@@ -34,6 +37,18 @@ public class SimulatorData {
         this.battery = battery;
     }
 
+    public Double getHumadity() { return humadity; }
+
+    public void setHumadity(Double humadity) { this.humadity = humadity; }
+
+    public String getBrake() { return brake; }
+
+    public void setBrake(String brake) { this.brake = brake; }
+
+    public Double getBensin() { return bensin; }
+
+    public void setBensin(Double bensin) { this.bensin = bensin; }
+
 //    public String getDatetime() {
 //        return datetime;
 //    }
@@ -41,6 +56,8 @@ public class SimulatorData {
 //    public void setDatetime(String datetime) {
 //        this.datetime = datetime;
 //    }
+
+
 
     public String getDeviceId() {
         return deviceId;
@@ -81,4 +98,7 @@ public class SimulatorData {
     public void setDoor(String door) {
         this.door = door;
     }
+
+
+
 }
