@@ -278,7 +278,7 @@
                         <TextView
                             android:id="@+id/textTemp"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_marginLeft="10dp"
                             android:fontFamily="@font/comfortaa_regular"
                             android:padding="1dp"
@@ -494,197 +494,213 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:padding="3dp">
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp">
 
-                    <LinearLayout
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="left"
+                    android:background="@drawable/speed" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="1dp"
+                    android:fontFamily="@font/comfortaa_regular"
+                    android:text="   humadity"
+                    android:textColor="#fff"
+                    android:textSize="25dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <SeekBar
+                    android:id="@+id/seekBarHuma"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="35dp"
+                    android:max="100"
+                    android:padding="5dp"
+                    android:progress="50"
+                    android:progressTint="#04c1ea"
+                    android:thumbTint="#04c1ea" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#FFC125">
+                    <TextView
+                        android:id="@+id/txtHuma"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp">
+                        android:layout_marginLeft="10dp"
+                        android:fontFamily="@font/comfortaa_regular"
+                        android:padding="1dp"
+                        android:text="0"
+                        android:textColor="#000"
+                        android:textSize="25dp"/>
 
-                        <ImageView
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_gravity="left"
-                            android:background="@drawable/speed" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="1dp"
-                            android:fontFamily="@font/comfortaa_regular"
-                            android:text="   humadity"
-                            android:textColor="#fff"
-                            android:textSize="25dp"/>
-
-                    </LinearLayout>
-
-                    <LinearLayout
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="1dp"
+                        android:fontFamily="@font/comfortaa_regular"
+                        android:padding="1dp"
+                        android:text="°"
+                        android:textColor="#000"
+                        android:textSize="25dp" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="left"
+                        android:background="@drawable/button_door"/>
+
+                    <TextView
+                        android:id="@+id/Brake"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="1dp"
+                        android:fontFamily="@font/comfortaa_regular"
+                        android:text="   brake"
+                        android:textColor="#fff"
+                        android:textSize="25dp"/>
+                </LinearLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp">
+
+                    <RadioGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="28dp"
                         android:orientation="horizontal">
 
 
-                            <SeekBar
-                                android:id="@+id/seekBarHuma"
-                                android:layout_width="250dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="35dp"
-                                android:max="100"
-                                android:padding="5dp"
-                                android:progress="50"
-                                android:progressTint="#04c1ea"
-                                android:thumbTint="#04c1ea" />
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="#FFC125">
-                            <TextView
-                                android:id="@+id/txtHuma"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="10dp"
-                                android:fontFamily="@font/comfortaa_regular"
-                                android:padding="1dp"
-                                android:text="0"
-                                android:textColor="#000"
-                                android:textSize="25dp"/>
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="1dp"
-                                android:fontFamily="@font/comfortaa_regular"
-                                android:padding="1dp"
-                                android:text="°"
-                                android:textColor="#000"
-                                android:textSize="25dp" />
-                        </LinearLayout>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="100dp"
-                        android:orientation="vertical">
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp">
-
-                            <ImageView
-                                android:layout_width="50dp"
-                                android:layout_height="50dp"
-                                android:layout_gravity="left"
-                                android:background="@drawable/button_door"/>
-
-                            <TextView
-                                android:id="@+id/Brake"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginTop="1dp"
-                                android:fontFamily="@font/comfortaa_regular"
-                                android:text="   brake"
-                                android:textColor="#fff"
-                                android:textSize="25dp"/>
-                        </LinearLayout>
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="80dp">
-
-                            <RadioGroup
-                                android:id="@+id/radioBrake"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginBottom="28dp"
-                                android:orientation="horizontal">
-
-
-
-                            <RadioButton
-                                android:id="@+id/radioRem"
-                                style="?android:attr/buttonStyleSmall"
-                                android:layout_width="130sp"
-                                android:layout_height="38dp"
-                                android:layout_marginLeft="80dp"
-                                android:background="#FFC125"
-                                android:buttonTint="#038ca9"
-                                android:gravity="center"
-                                android:text="REM"
-                                android:textColor="#000"/>
-
-                            <RadioButton
-                                android:id="@+id/radioTidak"
-                                style="?android:attr/buttonStyleSmall"
-                                android:layout_width="130dp"
-                                android:layout_height="38dp"
-                                android:layout_marginLeft="7dp"
-                                android:background="#FFC125"
-                                android:buttonTint="#038ca9"
-                                android:gravity="center"
-                                android:text=" TIDAK"
-                                android:textColor="#000"/>
-                            </RadioGroup>
-                        </RelativeLayout>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:id="@+id/Bensin"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="25dp">
-
-                            <ImageView
-                                android:layout_width="50dp"
-                                android:layout_height="50dp"
-                                android:layout_gravity="left"
-                                android:background="@drawable/button_battery"/>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:fontFamily="@font/comfortaa_regular"
-                                android:text="   bensin"
-                                android:textColor="#fff"
-                                android:textSize="25dp"/>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="275dp"
-                            android:layout_marginRight="40dp"
+                        <RadioButton
+                            android:id="@+id/radioRem"
+                            style="?android:attr/buttonStyleSmall"
+                            android:layout_width="130sp"
+                            android:layout_height="38dp"
+                            android:layout_marginLeft="80dp"
                             android:background="#FFC125"
-                            android:orientation="horizontal"
-                            android:padding="2dp">
+                            android:buttonTint="#038ca9"
+                            android:gravity="center"
+                            android:text="BERHENTI"
+                            android:textColor="#000"/>
 
-                            <TextView
-                                android:id="@+id/bensinText"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/comfortaa_regular"
-                                android:text=""
-                                android:textAlignment="viewStart"
-                                android:textColor="#000"
-                                android:textSize="20dp"/>
+                        <RadioButton
+                            android:id="@+id/radioTidak"
+                            style="?android:attr/buttonStyleSmall"
+                            android:layout_width="130dp"
+                            android:layout_height="38dp"
+                            android:layout_marginLeft="7dp"
+                            android:background="#FFC125"
+                            android:buttonTint="#038ca9"
+                            android:gravity="center"
+                            android:text=" JALAN"
+                            android:textColor="#000"/>
+                    </RadioGroup>
+                </RelativeLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/comfortaa_regular"
-                                android:nextFocusLeft="@id/bensinText"
-                                android:text="km/l"
-                                android:textAlignment="viewStart"
-                                android:textColor="#000"
-                                android:textSize="20dp" />
+                <LinearLayout
 
-                        </LinearLayout>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="left"
+                        android:background="@drawable/button_battery"/>
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="1dp"
+                        android:fontFamily="@font/comfortaa_regular"
+                        android:text="  bensin"
+                        android:textColor="#fff"
+                        android:textSize="25dp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <SeekBar
+                        android:id="@+id/seekBarBensin"
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="35dp"
+                        android:max="100"
+                        android:padding="5dp"
+                        android:progress="50"
+                        android:progressTint="#04c1ea"
+                        android:thumbTint="#04c1ea"
+
+
+                        />
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#FFC125">
+
+                        <TextView
+                            android:id="@+id/bensinText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:fontFamily="@font/comfortaa_regular"
+                            android:padding="1dp"
+                            android:text="0"
+                            android:textColor="#000"
+                            android:textSize="25dp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="1dp"
+                            android:fontFamily="@font/comfortaa_regular"
+                            android:padding="1dp"
+                            android:text="%"
+                            android:textColor="#000"
+                            android:textSize="25dp" />
+
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
