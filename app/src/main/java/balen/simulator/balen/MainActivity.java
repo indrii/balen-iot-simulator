@@ -11,12 +11,14 @@ import android.graphics.Color;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.os.BatteryManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -43,6 +45,7 @@ import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.MessageProperties;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.concurrent.TimeoutException;
 
@@ -67,6 +70,7 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
     private SeekBar seekbar;
     private ToggleButton submitToggle;
     private TextView speedText;
+    private TextView imei;
     private FusedLocationProviderClient fusedLocationProviderClient;
     Thread t;
     private LocationRequest mLocationRequest;
@@ -84,6 +88,9 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
         }
     };
 
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,6 +107,7 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
         seekbar = (SeekBar) findViewById(R.id.seekBarTemp);
         submitToggle = (ToggleButton) findViewById(R.id.toggleBtn);
         speedText = (TextView) findViewById(R.id.txtSpeed);
+        imei = (TextView) findViewById(R.id.txtIMEI);
 
 
         submitToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -119,6 +127,8 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
                     openRadio.setChecked(false);
                     closeRadio.setChecked(false);
                     device.setText("");
+                    imei.setText("");
+                    speedText.setText("");
                     seekbar.setProgress(50);
                     if(t.isAlive()){
                         //t.stop();
@@ -178,7 +188,7 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
 
                             @Override
                             public void run() {
-                                if ((ActivityCompat.checkSelfPermission(diz, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) && (ActivityCompat.checkSelfPermission(diz, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
+                                if ((ActivityCompat.checkSelfPermission(diz, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) && (ActivityCompat.checkSelfPermission(diz, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) && (ActivityCompat.checkSelfPermission(diz, Manifest.permission.READ_PHONE_STATE)!= PackageManager.PERMISSION_GRANTED)) {
                                  requestPermissions();
                                 }else {
 
@@ -199,10 +209,11 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
                                                     System.out.println("=========================");
 
                                                     Double speedInKPH = Double.valueOf(location.getSpeed()*18/5);
+                                                    DecimalFormat df= new DecimalFormat("#.##");
 
                                                     latitude.setText(String.valueOf(location.getLatitude()));
                                                     longtitude.setText(String.valueOf(location.getLongitude()));
-                                                    speedText.setText(String.valueOf(speedInKPH));
+                                                    speedText.setText(String.valueOf(df.format(speedInKPH)));
 
 
 
@@ -215,6 +226,7 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
                                 }
 
                                 if (!suspendPublisher){
+                                    imei.setText(String.valueOf(getImeiNumber()));
                                     SimulatorData data = new SimulatorData();
                                     data.setDeviceId(String.valueOf(device.getText().toString()));
 
@@ -228,6 +240,7 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
                                         data.setLongitude(Double.valueOf(longtitude.getText().toString()));
                                     }
 
+                                    data.setImei(String.valueOf(imei.getText().toString()));
 
                                     data.setBattery(Double.valueOf(battrey.getText().toString()));
 
@@ -265,7 +278,14 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
 
     }
 
-
+    private String getImeiNumber(){
+        final TelephonyManager tm = (TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            return  tm.getDeviceId();
+        }else {
+            return tm.getSubscriberId();
+        }
+    }
 
 
  // -----------------------------------------------------GPS---------------------------------------------------------------------
@@ -391,44 +411,34 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
 
     @Override
     public void onLocationChanged(Location location) {
-//
-//            mCurrentLocation = location;
-//        if (lStart == null) {
-//            lStart = mCurrentLocation;
-//            lEnd = mCurrentLocation;
-//        } else
-//            lEnd = mCurrentLocation;
-//
-//        speed = location.getSpeed() * 18/5;
-
 
     }
 
-    public double calcuSpeed(Location mCurrentLocation, Location mOldLocation){
-
-        double newlat = mCurrentLocation.getLatitude();
-        double newLon = mCurrentLocation.getLongitude();
-
-        double oldLat = mOldLocation.getLatitude();
-        double oldLon = mOldLocation.getLongitude();
-
-        if (mCurrentLocation.hasSpeed()){
-            return mCurrentLocation.getSpeed();
-        }else {
-            double radius = 6371000;
-            double dLat = Math.toRadians(newlat-oldLat);
-            double dLon = Math.toRadians(newLon-oldLon);
-            double a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-                        Math.cos(Math.toRadians((newlat))) * Math.cos(Math.toRadians(oldLat)) *
-                                Math.sin(dLon/2) * Math.sin(dLon/2);
-            double c = 2 * Math.asin(Math.sqrt(a));
-            double distance = Math.round(radius * c);
-
-            double timeDiffrent = mCurrentLocation.getTime() - mOldLocation.getTime();
-            return distance/timeDiffrent;
-
-        }
-    };
+//    public double calcuSpeed(Location mCurrentLocation, Location mOldLocation){
+//
+//        double newlat = mCurrentLocation.getLatitude();
+//        double newLon = mCurrentLocation.getLongitude();
+//
+//        double oldLat = mOldLocation.getLatitude();
+//        double oldLon = mOldLocation.getLongitude();
+//
+//        if (mCurrentLocation.hasSpeed()){
+//            return mCurrentLocation.getSpeed();
+//        }else {
+//            double radius = 6371000;
+//            double dLat = Math.toRadians(newlat-oldLat);
+//            double dLon = Math.toRadians(newLon-oldLon);
+//            double a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+//                        Math.cos(Math.toRadians((newlat))) * Math.cos(Math.toRadians(oldLat)) *
+//                                Math.sin(dLon/2) * Math.sin(dLon/2);
+//            double c = 2 * Math.asin(Math.sqrt(a));
+//            double distance = Math.round(radius * c);
+//
+//            double timeDiffrent = mCurrentLocation.getTime() - mOldLocation.getTime();
+//            return distance/timeDiffrent;
+//
+//        }
+//    };
 
 
 
