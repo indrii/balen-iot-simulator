@@ -46,7 +46,9 @@ import com.rabbitmq.client.MessageProperties;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.Date;
+import java.util.Locale;
 import java.util.concurrent.TimeoutException;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
@@ -74,6 +76,7 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
     private TextView bensin;
     private SeekBar seekbar;
     private SeekBar seekbarHuma;
+    private SeekBar seekbarBensin;
     private ToggleButton submitToggle;
     private TextView speedText;
     private TextView imei;
@@ -111,14 +114,15 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
         radioRem = (RadioButton) findViewById(R.id.radioRem);
         radioTidak = (RadioButton) findViewById(R.id.radioTidak);
         doorGroup = (RadioGroup) findViewById(R.id.radioGroup);
+        brakeGroup = (RadioGroup) findViewById(R.id.radioBrake);
         battrey = (TextView) findViewById(R.id.battreyText);
-        bensin = (TextView) findViewById(R.id.bensinText);
+        bensin = (TextView) findViewById(R.id.textBensin);
         seekbar = (SeekBar) findViewById(R.id.seekBarTemp);
         seekbarHuma = (SeekBar) findViewById(R.id.seekBarHuma);
+        seekbarBensin = (SeekBar) findViewById(R.id.seekBarBensin);
         submitToggle = (ToggleButton) findViewById(R.id.toggleBtn);
         speedText = (TextView) findViewById(R.id.txtSpeed);
         humadity = (TextView) findViewById(R.id.txtHuma);
-
         imei = (TextView) findViewById(R.id.txtIMEI);
 
 
@@ -143,12 +147,15 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
                     radioRem.setChecked(false);
                     radioTidak.setChecked(false);
                     device.setText("");
+                    bensin.setText("");
 
                     if (imei != null){
                         imei.setText("");
                     }
                     speedText.setText("");
                     seekbar.setProgress(50);
+                    seekbarHuma.setProgress(50);
+                    seekbarBensin.setProgress(0);
                     if(t.isAlive()){
                         //t.stop();
 
@@ -187,6 +194,23 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
             public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
                 int buffer = progress - min;
                 humadity.setText(""   + buffer + "");
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        seekbarBensin.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                bensin.setText(""+ i +"");
             }
 
             @Override
@@ -247,7 +271,8 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
                                                     System.out.println("=========================");
 
                                                     Double speedInKPH = Double.valueOf(location.getSpeed()*18/5);
-                                                    DecimalFormat df= new DecimalFormat("#.##");
+                                                    DecimalFormat df= new DecimalFormat("#.#");
+                                                    df.setDecimalFormatSymbols(new DecimalFormatSymbols(Locale.US));
 
                                                     latitude.setText(String.valueOf(location.getLatitude()));
                                                     longtitude.setText(String.valueOf(location.getLongitude()));
@@ -293,11 +318,14 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
                                     data.setBattery(Double.valueOf(battrey.getText().toString()));
 
 
+                                    if (bensin.getText() !=null && !bensin.getText().toString().isEmpty()){
+                                        data.setBensin(Double.valueOf(bensin.getText().toString()));
+                                    }
 
                                     if (speedText.getText() != null && !speedText.getText().equals("")){
                                         data.setSpeed(Double.valueOf(speedText.getText().toString()));
                                     }
-
+//=========================================================Door Group========================================================================================
                                     String checked = null;
 
                                     if (doorGroup.getCheckedRadioButtonId() == closeRadio.getId()){
@@ -306,12 +334,18 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
                                         checked = "OPEN";
                                     }
 
-
-                                    System.out.println("===CHECKED===");
-                                    System.out.println(checked);
-                                    System.out.println("=============");
                                     data.setDoorState(checked);
+//=========================================================Brake Group=======================================================================
+                                    String checkedBrake = null;
+                                    if (brakeGroup.getCheckedRadioButtonId() == radioRem.getId()){
+                                        checkedBrake = "REM";
+                                    } else if (brakeGroup.getCheckedRadioButtonId() == radioTidak.getId()){
+                                        checkedBrake = "Jalan";
+                                    }
 
+                                    data.setBrake(checkedBrake);
+
+//===================================~~~~~~~~~~~~~~~~~~~~~Json~~~~~~~~~~~~~~~=====================================================================
                                     ObjectMapper mapper = new ObjectMapper();
 
                                     try {
