@@ -89,7 +89,7 @@
 
                         <EditText
                             android:id="@+id/deviceField"
-                            android:layout_width="278dp"
+                            android:layout_width="270dp"
                             android:layout_height="28dp"
                             android:layout_gravity="bottom"
                             android:layout_marginLeft="5dp"
@@ -244,7 +244,7 @@
                         android:background="@drawable/button_temperature" />
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="300dp"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
@@ -264,7 +264,7 @@
 
                             <SeekBar
                                 android:id="@+id/seekBarTemp"
-                                android:layout_width="248dp"
+                                android:layout_width="240dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="5dp"
                                 android:max="100"
@@ -423,9 +423,9 @@
                             android:textSize="14dp" />
 
                         <LinearLayout
-                            android:layout_width="30dp"
+                            android:layout_width="40dp"
                             android:layout_height="25dp"
-                            android:layout_marginLeft="255dp"
+                            android:layout_marginLeft="235dp"
                             android:background="@drawable/bgkotak"
                             android:orientation="horizontal"
                             android:padding="2dp"
@@ -509,7 +509,7 @@
                         <LinearLayout
                             android:layout_width="60dp"
                             android:layout_height="25dp"
-                            android:layout_marginLeft="225dp"
+                            android:layout_marginLeft="215dp"
                             android:background="@drawable/bgkotak"
                             android:orientation="horizontal"
                             android:padding="2dp"
@@ -577,7 +577,7 @@
 
                         <TextView
                             android:id="@+id/txtIMEI"
-                            android:layout_width="280dp"
+                            android:layout_width="270dp"
                             android:layout_height="28dp"
                             android:layout_gravity="bottom"
                             android:layout_marginLeft="5dp"
@@ -637,7 +637,7 @@
 
                             <SeekBar
                                 android:id="@+id/seekBarHuma"
-                                android:layout_width="248dp"
+                                android:layout_width="240dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="5dp"
                                 android:max="100"
@@ -795,7 +795,7 @@
 
                             <SeekBar
                                 android:id="@+id/seekBarBensin"
-                                android:layout_width="248dp"
+                                android:layout_width="240dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="5dp"
                                 android:max="100"
