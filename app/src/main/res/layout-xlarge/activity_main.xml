@@ -71,6 +71,7 @@
                         android:layout_height="30dp"
                         android:layout_gravity="left"
                         android:background="@drawable/button_device" />
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -82,30 +83,29 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
                             android:fontFamily="@font/comfortaa_regular"
-                            android:text="device"
+                            android:text="alat"
                             android:textColor="#fff"
-                            android:textSize="15dp"
-                            />
+                            android:textSize="14dp" />
+
                         <EditText
                             android:id="@+id/deviceField"
-                            android:layout_width="160dp"
+                            android:layout_width="278dp"
                             android:layout_height="28dp"
                             android:layout_gravity="bottom"
                             android:layout_marginLeft="5dp"
                             android:layout_marginTop="10dp"
                             android:background="@drawable/bgedit"
                             android:drawablePadding="10dp"
-                            android:textSize="15dp"
                             android:fontFamily="@font/comfortaa_regular"
                             android:padding="4dp"
-                            android:textColor="#000" />
+                            android:textColor="#000"
+                            android:textSize="15dp" />
                     </LinearLayout>
 
                 </LinearLayout>
 
 
             </LinearLayout>
-
 
 
             <LinearLayout
@@ -127,21 +127,22 @@
                         android:layout_height="30dp"
                         android:layout_gravity="left"
                         android:background="@drawable/button_location" />
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        >
+                        android:orientation="vertical">
+
                         <TextView
                             android:id="@+id/txtPoint"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/comfortaa_regular"
-                            android:text="location"
-                            android:textColor="#fff"
-                            android:textSize="15dp"
                             android:layout_marginLeft="5dp"
-                            />
+                            android:fontFamily="@font/comfortaa_regular"
+                            android:text="lokasi"
+                            android:textColor="#fff"
+                            android:textSize="14dp" />
+
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -151,7 +152,7 @@
 
                             <RelativeLayout
                                 android:id="@+id/relLat"
-                                android:layout_width="150dp"
+                                android:layout_width="130dp"
                                 android:layout_height="55dp"
                                 android:layout_marginLeft="5dp"
                                 android:background="@drawable/bglocation">
@@ -162,10 +163,9 @@
                                     android:layout_height="wrap_content"
                                     android:layout_centerHorizontal="true"
                                     android:fontFamily="@font/comfortaa_regular"
-                                    android:text="Latitude"
+                                    android:text="latitude"
                                     android:textColor="#000"
-                                    android:textSize="15dp"
-                                    />
+                                    android:textSize="14dp" />
 
                                 <TextView
                                     android:id="@+id/latField"
@@ -178,11 +178,11 @@
                                     android:gravity="center"
                                     android:padding="4dp"
                                     android:textColor="#000"
-                                    android:textSize="15dp" />
+                                    android:textSize="14dp" />
                             </RelativeLayout>
 
                             <RelativeLayout
-                                android:layout_width="150dp"
+                                android:layout_width="130dp"
                                 android:layout_height="55dp"
                                 android:layout_marginLeft="10dp"
                                 android:background="@drawable/bglocation"
@@ -197,10 +197,9 @@
                                     android:layout_centerHorizontal="true"
                                     android:fontFamily="@font/comfortaa_regular"
                                     android:nextFocusLeft="@id/txtLat"
-                                    android:text="Longitude"
+                                    android:text="longitude"
                                     android:textColor="#000"
-                                    android:textSize="15dp"
-                                    />
+                                    android:textSize="14dp" />
 
                                 <TextView
                                     android:id="@+id/longField"
@@ -223,8 +222,6 @@
                 </LinearLayout>
 
 
-
-
             </LinearLayout>
 
             <LinearLayout
@@ -250,25 +247,24 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/comfortaa_regular"
-                            android:text="temperature"
-                            android:textColor="#fff"
-                            android:textSize="15dp"
                             android:layout_marginLeft="5dp"
-                            />
+                            android:fontFamily="@font/comfortaa_regular"
+                            android:text="temperatur"
+                            android:textColor="#fff"
+                            android:textSize="14dp" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            >
+                            android:orientation="horizontal">
 
                             <SeekBar
                                 android:id="@+id/seekBarTemp"
-                                android:layout_width="250dp"
+                                android:layout_width="248dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="5dp"
                                 android:max="100"
@@ -281,10 +277,10 @@
                                 />
 
                             <LinearLayout
-                                android:layout_width="32dp"
+                                android:layout_width="30dp"
                                 android:layout_height="25dp"
-                                android:background="@drawable/bgkotak"
-                                android:layout_gravity="center">
+                                android:layout_gravity="center"
+                                android:background="@drawable/bgkotak">
 
                                 <TextView
                                     android:id="@+id/textTemp"
@@ -295,7 +291,7 @@
                                     android:padding="1dp"
                                     android:text="0"
                                     android:textColor="#000"
-                                    android:textSize="15dp" />
+                                    android:textSize="14dp" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -304,13 +300,12 @@
                                     android:padding="1dp"
                                     android:text="°"
                                     android:textColor="#000"
-                                    android:textSize="15dp" />
+                                    android:textSize="14dp" />
                             </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
 
                 </LinearLayout>
-
 
 
             </LinearLayout>
@@ -323,7 +318,7 @@
                 android:padding="3dp">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="350dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp">
 
@@ -331,59 +326,60 @@
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:background="@drawable/button_door" />
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
+
                         <TextView
                             android:id="@+id/door"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="1dp"
                             android:layout_marginLeft="5dp"
+                            android:layout_marginTop="1dp"
                             android:fontFamily="@font/comfortaa_regular"
-                            android:text="door state"
+                            android:text="keadaan pintu"
                             android:textColor="#fff"
-                            android:textSize="15dp"
-                            />
+                            android:textSize="14dp" />
+
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="310dp"
                             android:layout_height="wrap_content">
 
                             <RadioGroup
                                 android:id="@+id/radioGroup"
-                                android:layout_width="match_parent"
+                                android:layout_width="350dp"
                                 android:layout_height="wrap_content"
+                                android:layout_marginLeft="25dp"
                                 android:layout_marginTop="10dp"
                                 android:layout_marginBottom="28dp"
                                 android:orientation="horizontal">
 
                                 <RadioButton
                                     android:id="@+id/radioOpen"
-                                    style="?android:attr/buttonStyleSmall"
-                                    android:layout_width="130sp"
+                                    android:layout_width="120sp"
                                     android:layout_height="35dp"
                                     android:layout_marginLeft="5dp"
                                     android:background="@drawable/bgkotak"
                                     android:buttonTint="#038ca9"
                                     android:gravity="center"
-                                    android:text="OPEN"
+                                    android:text="terbuka"
                                     android:textColor="#000"
-                                    android:textSize="15dp"/>
+                                    android:textSize="14dp" />
 
                                 <RadioButton
                                     android:id="@+id/radioClose"
-                                    style="?android:attr/buttonStyleSmall"
-                                    android:layout_width="130dp"
+                                    android:layout_width="120dp"
                                     android:layout_height="35dp"
                                     android:layout_marginLeft="7dp"
                                     android:layout_toRightOf="@+id/radioOpen"
                                     android:background="@drawable/bgkotak"
                                     android:buttonTint="#038ca9"
                                     android:gravity="center"
-                                    android:text="CLOSE"
+                                    android:text="tertutup"
                                     android:textColor="#000"
-                                    android:textSize="15dp"/>
+                                    android:textSize="14dp" />
                             </RadioGroup>
 
 
@@ -391,7 +387,6 @@
                     </LinearLayout>
 
                 </LinearLayout>
-
 
 
             </LinearLayout>
@@ -414,22 +409,23 @@
                         android:background="@drawable/button_battery" />
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="290dp"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/comfortaa_regular"
-                            android:text="battery"
-                            android:textColor="#fff"
-                            android:textSize="15dp"
                             android:layout_marginLeft="5dp"
-                            />
+                            android:fontFamily="@font/comfortaa_regular"
+                            android:text="baterai"
+                            android:textColor="#fff"
+                            android:textSize="14dp" />
+
                         <LinearLayout
-                            android:layout_width="40dp"
+                            android:layout_width="30dp"
                             android:layout_height="25dp"
-                            android:layout_marginLeft="232dp"
+                            android:layout_marginLeft="255dp"
                             android:background="@drawable/bgkotak"
                             android:orientation="horizontal"
                             android:padding="2dp"
@@ -446,6 +442,20 @@
                                 android:textColor="#000"
                                 android:textSize="15dp" />
 
+
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/comfortaa_regular"
+                                android:nextFocusLeft="@id/battreyText"
+                                android:text=""
+                                android:textAlignment="viewStart"
+                                android:textColor="#000"
+                                android:textSize="15dp" />
+
+
+
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -454,7 +464,7 @@
                                 android:text="%"
                                 android:textAlignment="viewStart"
                                 android:textColor="#000"
-                                android:textSize="15dp" />
+                                android:textSize="14dp" />
                         </LinearLayout>
 
                     </LinearLayout>
@@ -483,22 +493,23 @@
                         android:background="@drawable/speed" />
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="310dp"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
                             android:fontFamily="@font/comfortaa_regular"
-                            android:text="speed"
+                            android:text="kecepatan"
                             android:textColor="#fff"
-                            android:textSize="15dp"
-                            />
+                            android:textSize="14dp" />
+
                         <LinearLayout
-                            android:layout_width="90dp"
+                            android:layout_width="60dp"
                             android:layout_height="25dp"
-                            android:layout_marginLeft="180dp"
+                            android:layout_marginLeft="225dp"
                             android:background="@drawable/bgkotak"
                             android:orientation="horizontal"
                             android:padding="2dp"
@@ -513,17 +524,17 @@
                                 android:text=""
                                 android:textAlignment="viewStart"
                                 android:textColor="#000"
-                                android:textSize="15dp" />
+                                android:textSize="14dp" />
 
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/comfortaa_regular"
                                 android:nextFocusLeft="@id/txtSpeed"
-                                android:text=" Km/h"
+                                android:text=" km/h"
                                 android:textAlignment="viewStart"
                                 android:textColor="#000"
-                                android:textSize="15dp" />
+                                android:textSize="14dp" />
                         </LinearLayout>
 
                     </LinearLayout>
@@ -548,12 +559,13 @@
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_gravity="left"
-                        android:background="@drawable/speed" />
+                        android:background="@drawable/buttonimei" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -561,22 +573,21 @@
                             android:fontFamily="@font/comfortaa_regular"
                             android:text="IMEI"
                             android:textColor="#fff"
-                            android:textSize="15dp"
-                            />
+                            android:textSize="14dp" />
 
                         <TextView
                             android:id="@+id/txtIMEI"
-                            android:layout_width="160dp"
+                            android:layout_width="280dp"
                             android:layout_height="28dp"
                             android:layout_gravity="bottom"
                             android:layout_marginLeft="5dp"
                             android:layout_marginTop="10dp"
                             android:background="@drawable/bgedit"
                             android:drawablePadding="10dp"
-                            android:textSize="15dp"
                             android:fontFamily="@font/comfortaa_regular"
                             android:padding="4dp"
-                            android:textColor="#000" />
+                            android:textColor="#000"
+                            android:textSize="14dp" />
 
                     </LinearLayout>
 
@@ -603,31 +614,30 @@
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_gravity="left"
-                        android:background="@drawable/button_temperature" />
+                        android:background="@drawable/buttonhumidity" />
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="330dp"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/comfortaa_regular"
-                            android:text="humadity"
-                            android:textColor="#fff"
-                            android:textSize="15dp"
                             android:layout_marginLeft="5dp"
-                            />
+                            android:fontFamily="@font/comfortaa_regular"
+                            android:text="kelembaban"
+                            android:textColor="#fff"
+                            android:textSize="14dp" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            >
+                            android:orientation="horizontal">
 
                             <SeekBar
                                 android:id="@+id/seekBarHuma"
-                                android:layout_width="250dp"
+                                android:layout_width="248dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="5dp"
                                 android:max="100"
@@ -642,8 +652,8 @@
                             <LinearLayout
                                 android:layout_width="32dp"
                                 android:layout_height="25dp"
-                                android:background="@drawable/bgkotak"
-                                android:layout_gravity="center">
+                                android:layout_gravity="center"
+                                android:background="@drawable/bgkotak">
 
                                 <TextView
                                     android:id="@+id/txtHuma"
@@ -654,7 +664,7 @@
                                     android:padding="1dp"
                                     android:text="0"
                                     android:textColor="#000"
-                                    android:textSize="15dp" />
+                                    android:textSize="14dp" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -663,7 +673,7 @@
                                     android:padding="1dp"
                                     android:text="°"
                                     android:textColor="#000"
-                                    android:textSize="15dp" />
+                                    android:textSize="14dp" />
                             </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
@@ -671,13 +681,14 @@
                 </LinearLayout>
 
 
-
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:orientation="vertical"
                 android:padding="3dp">
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -687,56 +698,58 @@
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_gravity="left"
-                        android:background="@drawable/button_door"/>
+                        android:background="@drawable/buttonbrakes" />
+
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="340dp"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
+
                         <TextView
                             android:id="@+id/Brake"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
                             android:fontFamily="@font/comfortaa_regular"
-                            android:text="brake"
+                            android:text="rem"
                             android:textColor="#fff"
-                            android:textSize="15dp"/>
+                            android:textSize="14dp" />
+
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="320dp"
                             android:layout_height="wrap_content">
 
                             <RadioGroup
                                 android:id="@+id/radioBrake"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_marginLeft="45dp"
                                 android:layout_marginTop="10dp"
                                 android:orientation="horizontal">
 
                                 <RadioButton
                                     android:id="@+id/radioRem"
-                                    style="?android:attr/buttonStyleSmall"
-                                    android:layout_width="130sp"
+                                    android:layout_width="110sp"
                                     android:layout_height="35dp"
                                     android:layout_marginLeft="5dp"
                                     android:background="@drawable/bgkotak"
                                     android:buttonTint="#038ca9"
                                     android:gravity="center"
-                                    android:text="REM"
+                                    android:text="rem"
                                     android:textColor="#000"
-                                    android:textSize="15dp"/>
+                                    android:textSize="14dp" />
 
                                 <RadioButton
                                     android:id="@+id/radioTidak"
-                                    style="?android:attr/buttonStyleSmall"
-                                    android:layout_width="130sp"
+                                    android:layout_width="110sp"
                                     android:layout_height="35dp"
                                     android:layout_marginLeft="5dp"
                                     android:background="@drawable/bgkotak"
                                     android:buttonTint="#038ca9"
                                     android:gravity="center"
-                                    android:text="GO"
+                                    android:text="jalan"
                                     android:textColor="#000"
-                                    android:textSize="15dp"/>
+                                    android:textSize="14dp" />
                             </RadioGroup>
                         </LinearLayout>
                     </LinearLayout>
@@ -744,6 +757,7 @@
                 </LinearLayout>
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -759,7 +773,8 @@
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_gravity="left"
-                        android:background="@drawable/button_battery"/>
+                        android:background="@drawable/buttonfuel" />
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -769,19 +784,18 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/comfortaa_regular"
-                            android:text="bensin"
+                            android:text=" bensin"
                             android:textColor="#fff"
-                            android:textSize="15dp"/>
+                            android:textSize="14dp" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            >
+                            android:orientation="horizontal">
 
                             <SeekBar
                                 android:id="@+id/seekBarBensin"
-                                android:layout_width="250dp"
+                                android:layout_width="248dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="5dp"
                                 android:max="100"
@@ -793,10 +807,10 @@
                                 />
 
                             <LinearLayout
-                                android:layout_width="40dp"
+                                android:layout_width="32dp"
                                 android:layout_height="25dp"
-                                android:background="@drawable/bgkotak"
-                                android:layout_gravity="center">
+                                android:layout_gravity="center"
+                                android:background="@drawable/bgkotak">
 
                                 <TextView
                                     android:id="@+id/textBensin"
@@ -807,16 +821,16 @@
                                     android:padding="1dp"
                                     android:text="0"
                                     android:textColor="#000"
-                                    android:textSize="15dp" />
+                                    android:textSize="14dp" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/comfortaa_regular"
                                     android:padding="1dp"
-                                    android:text="L"
+                                    android:text="l"
                                     android:textColor="#000"
-                                    android:textSize="15dp" />
+                                    android:textSize="14dp" />
                             </LinearLayout>
                         </LinearLayout>
 
@@ -841,15 +855,12 @@
                     android:fontFamily="@font/comfortaa_regular"
                     android:gravity="center"
                     android:textColor="#fff"
-                    android:textOff="Transmit"
-                    android:textOn="Stop"
-                    android:textSize="15dp"
-                    />
+                    android:textOff="transmit"
+                    android:textOn="stop"
+                    android:textSize="14dp" />
             </LinearLayout>
 
         </LinearLayout>
-
-
 
 
     </ScrollView>
